@@ -1,70 +1,9 @@
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
+import { retreats } from "@/data/retreats";
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar, Clock, MapPin, Users } from "lucide-react";
-
-const retreats = [
-  {
-    id: 1,
-    title: "Signature Rhythm",
-    duration: "5 Days",
-    location: "Coorg",
-    price: "₹29,000",
-    image: "/images/retreat-yoga.jpg",
-    description: "Balanced yoga, meditation, nature immersion, strength, and therapy support. The perfect introduction to the 7point83 lifestyle.",
-    tags: ["Beginner Friendly", "Nature", "Yoga"]
-  },
-  {
-    id: 2,
-    title: "Sleep & Stress Recovery",
-    duration: "7 Days",
-    location: "Wayanad",
-    price: "₹45,000",
-    image: "/images/hero-forest.jpg",
-    description: "Burnout reset with HRV-friendly routines and evening downshift protocols. Designed for high-performers needing deep rest.",
-    tags: ["Burnout", "Sleep", "Relaxation"]
-  },
-  {
-    id: 3,
-    title: "Gut & Metabolic Reset",
-    duration: "7 Days",
-    location: "Goa Hinterlands",
-    price: "₹48,000",
-    image: "/images/mindful-eating.jpg",
-    description: "Mindful eating rituals, kitchen workshops, and digestive-friendly movement. Rebuild your relationship with food.",
-    tags: ["Detox", "Nutrition", "Wellness"]
-  },
-  {
-    id: 4,
-    title: "Deep Work & Focus",
-    duration: "11 Days",
-    location: "Himalayas",
-    price: "₹75,000",
-    image: "/images/meditation-close.jpg",
-    description: "Attention reset, screen detox, and clarity-building deep work. For creatives and leaders seeking a breakthrough.",
-    tags: ["Digital Detox", "Focus", "Leadership"]
-  },
-  {
-    id: 5,
-    title: "Traditional Rejuvenation",
-    duration: "14 Days",
-    location: "Kerala",
-    price: "₹1,10,000",
-    image: "/images/about-community.jpg",
-    description: "Ayurveda-inspired therapies, cleansing, and restorative movement. A deep dive into ancient healing traditions.",
-    tags: ["Ayurveda", "Healing", "Therapy"]
-  },
-  {
-    id: 6,
-    title: "The Transformation",
-    duration: "21 Days",
-    location: "Rishikesh",
-    price: "₹1,65,000",
-    image: "/images/philosophy-resonance.jpg",
-    description: "Extended phases that weave detox, strength, deep work, and finish with an integration week. A complete life reset.",
-    tags: ["Transformation", "Intensive", "Life Change"]
-  }
-];
+import { ArrowRight, MapPin, Users } from "lucide-react";
+import { Link } from "wouter";
 
 export default function Retreats() {
   return (
@@ -123,9 +62,11 @@ export default function Retreats() {
                 
                 <div className="pt-4 border-t border-border flex items-center justify-between">
                   <span className="font-serif text-lg">{retreat.price}</span>
-                  <Button variant="ghost" className="p-0 hover:bg-transparent hover:text-primary group-hover:translate-x-1 transition-all">
-                    View Details <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
+                  <Link href={`/retreats/${retreat.id}`}>
+                    <Button variant="ghost" className="p-0 hover:bg-transparent hover:text-primary group-hover:translate-x-1 transition-all">
+                      View Details <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </motion.div>
