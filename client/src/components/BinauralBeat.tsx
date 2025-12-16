@@ -8,12 +8,14 @@ interface BinauralBeatProps {
   baseFreq?: number; // Base frequency (e.g., 200Hz)
   beatFreq?: number; // Beat frequency (e.g., 7.83Hz)
   autoPlay?: boolean;
+  onPlayChange?: (isPlaying: boolean) => void;
 }
 
 export default function BinauralBeat({ 
   baseFreq = 200, 
   beatFreq = 7.83,
-  autoPlay = false 
+  autoPlay = false,
+  onPlayChange
 }: BinauralBeatProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isGuided, setIsGuided] = useState(true);
@@ -89,6 +91,7 @@ export default function BinauralBeat({
       }
 
       setIsPlaying(true);
+      onPlayChange?.(true);
     } catch (error) {
       console.error("Failed to start audio:", error);
     }
@@ -123,6 +126,7 @@ export default function BinauralBeat({
         leftOscRef.current = null;
         rightOscRef.current = null;
         setIsPlaying(false);
+        onPlayChange?.(false);
       }, 1000);
     }
   };

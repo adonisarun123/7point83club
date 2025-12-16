@@ -39,6 +39,7 @@ export default function Philosophy() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ align: "start", loop: false });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -80,7 +81,7 @@ export default function Philosophy() {
           
           {/* Audio Control Overlay */}
           <div className="absolute bottom-8 right-8 z-10">
-            <BinauralBeat />
+            <BinauralBeat onPlayChange={setIsAudioPlaying} />
           </div>
         </div>
 
@@ -240,7 +241,23 @@ export default function Philosophy() {
                <div className="absolute inset-0 opacity-40">
                  <FrequencyVisualizer mode="coherent" />
                </div>
-               <span className="absolute font-serif text-6xl text-primary z-10">7.83Hz</span>
+               <motion.span 
+                 className="absolute font-serif text-6xl text-primary z-10"
+                 animate={isAudioPlaying ? {
+                   scale: [1, 1.1, 1],
+                   opacity: [0.8, 1, 0.8],
+                 } : {
+                   scale: 1,
+                   opacity: 1
+                 }}
+                 transition={{
+                   duration: 4, // Matches a slow breathing cycle (4s in, 4s out approx)
+                   repeat: Infinity,
+                   ease: "easeInOut"
+                 }}
+               >
+                 7.83Hz
+               </motion.span>
             </div>
             <div className="order-1 md:order-2 space-y-6">
               <h2 className="font-serif text-4xl">The Re-alignment</h2>
