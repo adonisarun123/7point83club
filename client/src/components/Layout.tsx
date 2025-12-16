@@ -34,12 +34,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out border-b border-transparent",
-          isScrolled ? "bg-background/90 backdrop-blur-md py-4 border-border/40" : "bg-transparent py-6"
+          isScrolled 
+            ? "bg-background/95 backdrop-blur-md py-4 border-border/40 shadow-sm" 
+            : "bg-gradient-to-b from-black/50 to-transparent py-6"
         )}
       >
         <div className="container flex items-center justify-between">
           <Link href="/">
-            <a className="font-serif text-2xl md:text-3xl font-bold tracking-tighter hover:opacity-80 transition-opacity">
+            <a className={cn(
+              "font-serif text-2xl md:text-3xl font-bold tracking-tighter hover:opacity-80 transition-opacity",
+              isScrolled ? "text-foreground" : "text-white"
+            )}>
               7point83<span className="text-primary">.</span>
             </a>
           </Link>
@@ -50,7 +55,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <Link key={link.name} href={link.href}>
                 <a className={cn(
                   "text-sm font-medium tracking-wide uppercase hover:text-primary transition-colors relative group",
-                  location === link.href ? "text-primary" : "text-foreground/80"
+                  location === link.href ? "text-primary" : (isScrolled ? "text-foreground/80" : "text-white/90")
                 )}>
                   {link.name}
                   <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-primary transition-all duration-300 group-hover:w-full" />
@@ -64,7 +69,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
           {/* Mobile Toggle */}
           <button
-            className="md:hidden p-2 text-foreground"
+            className={cn(
+              "md:hidden p-2 transition-colors",
+              isScrolled ? "text-foreground" : "text-white"
+            )}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X /> : <Menu />}
