@@ -31,7 +31,7 @@ const principles = [
 ];
 
 export default function Philosophy() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
     <Layout>
@@ -69,7 +69,7 @@ export default function Philosophy() {
             <div className="text-center mb-16">
               <h2 className="font-serif text-4xl md:text-5xl mb-6">The Science of Connection</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Hover over the pillars below to explore the biological mechanisms behind our philosophy.
+                Hover (or tap) over the pillars below to explore the biological mechanisms behind our philosophy.
               </p>
             </div>
             
@@ -77,12 +77,18 @@ export default function Philosophy() {
               {principles.map((item, index) => (
                 <motion.div
                   key={item.id}
-                  onHoverStart={() => setHoveredIndex(index)}
-                  onHoverEnd={() => setHoveredIndex(null)}
+                  onHoverStart={() => setActiveIndex(index)}
+                  onHoverEnd={() => setActiveIndex(null)}
+                  onClick={() => setActiveIndex(activeIndex === index ? null : index)}
+                  whileTap={{ scale: 0.98 }}
                   className="relative h-[400px] bg-card border border-border rounded-sm overflow-hidden cursor-pointer group"
                 >
                   {/* Default State */}
-                  <div className="absolute inset-0 p-8 flex flex-col items-center justify-center text-center transition-opacity duration-500 group-hover:opacity-0">
+                  <motion.div 
+                    className="absolute inset-0 p-8 flex flex-col items-center justify-center text-center"
+                    animate={{ opacity: activeIndex === index ? 0 : 1 }}
+                    transition={{ duration: 0.5 }}
+                  >
                     <div className="mb-6 text-primary p-4 bg-primary/5 rounded-full">
                       {item.icon}
                     </div>
@@ -91,23 +97,28 @@ export default function Philosophy() {
                     <p className="text-muted-foreground leading-relaxed">
                       {item.description}
                     </p>
-                  </div>
+                  </motion.div>
 
-                  {/* Hover State */}
-                  <div className="absolute inset-0 bg-primary/5 p-8 flex flex-col items-center justify-center text-center opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                  {/* Active/Hover State */}
+                  <motion.div 
+                    className="absolute inset-0 bg-primary/5 p-8 flex flex-col items-center justify-center text-center"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: activeIndex === index ? 1 : 0 }}
+                    transition={{ duration: 0.5 }}
+                  >
                     <h3 className="font-serif text-2xl mb-4 text-primary">{item.title}</h3>
                     <p className="text-foreground leading-relaxed font-medium">
                       {item.detail}
                     </p>
                     <div className="mt-8 w-12 h-1 bg-primary/20 rounded-full" />
-                  </div>
+                  </motion.div>
                   
                   {/* Animated Border */}
                   <motion.div 
                     className="absolute inset-0 border-2 border-primary/0"
                     animate={{ 
-                      borderColor: hoveredIndex === index ? "var(--primary)" : "transparent",
-                      opacity: hoveredIndex === index ? 0.5 : 0
+                      borderColor: activeIndex === index ? "var(--primary)" : "transparent",
+                      opacity: activeIndex === index ? 0.5 : 0
                     }}
                     transition={{ duration: 0.3 }}
                   />
