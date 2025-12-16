@@ -1,7 +1,38 @@
 import Layout from "@/components/Layout";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { Activity, Moon, Sun, Trees } from "lucide-react";
+
+const principles = [
+  {
+    id: 1,
+    title: "Schumann Resonance",
+    subtitle: "7.83 Hz",
+    icon: <Activity className="w-8 h-8" />,
+    description: "The Earth's electromagnetic heartbeat. It matches the human brain's alpha waves, promoting deep relaxation and healing.",
+    detail: "Discovered by Winfried Otto Schumann, this frequency is the resonant frequency of the Earth's ionosphere. When we are in nature, our brainwaves naturally entrain to this pulse, leading to a state of 'grounded' calm."
+  },
+  {
+    id: 2,
+    title: "Circadian Rhythm",
+    subtitle: "Light & Dark",
+    icon: <Sun className="w-8 h-8" />,
+    description: "Our internal body clock. Regulated by natural light and darkness, essential for hormonal balance and restorative sleep.",
+    detail: "Modern artificial light disrupts this delicate cycle. Our retreats prioritize sunrise awakening and sunset wind-downs to reset your melatonin production and cortisol curves."
+  },
+  {
+    id: 3,
+    title: "Biophilia Effect",
+    subtitle: "Nature Connection",
+    icon: <Trees className="w-8 h-8" />,
+    description: "Our innate biological connection to nature. Exposure to forests lowers cortisol, blood pressure, and pulse rate.",
+    detail: "Japanese research on 'Shinrin-yoku' (Forest Bathing) proves that NK (Natural Killer) white blood cells increase after just one weekend in the woods, boosting immunity for up to a month."
+  }
+];
 
 export default function Philosophy() {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   return (
     <Layout>
       <div className="pt-32 pb-20">
@@ -32,7 +63,59 @@ export default function Philosophy() {
           <div className="absolute inset-0 bg-black/20" />
         </div>
 
-        <div className="container max-w-4xl mx-auto space-y-24">
+        <div className="container max-w-6xl mx-auto space-y-32">
+          {/* Interactive Principles Section */}
+          <section>
+            <div className="text-center mb-16">
+              <h2 className="font-serif text-4xl md:text-5xl mb-6">The Science of Connection</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Hover over the pillars below to explore the biological mechanisms behind our philosophy.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {principles.map((item, index) => (
+                <motion.div
+                  key={item.id}
+                  onHoverStart={() => setHoveredIndex(index)}
+                  onHoverEnd={() => setHoveredIndex(null)}
+                  className="relative h-[400px] bg-card border border-border rounded-sm overflow-hidden cursor-pointer group"
+                >
+                  {/* Default State */}
+                  <div className="absolute inset-0 p-8 flex flex-col items-center justify-center text-center transition-opacity duration-500 group-hover:opacity-0">
+                    <div className="mb-6 text-primary p-4 bg-primary/5 rounded-full">
+                      {item.icon}
+                    </div>
+                    <h3 className="font-serif text-2xl mb-2">{item.title}</h3>
+                    <span className="text-xs uppercase tracking-widest text-muted-foreground mb-6">{item.subtitle}</span>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+
+                  {/* Hover State */}
+                  <div className="absolute inset-0 bg-primary/5 p-8 flex flex-col items-center justify-center text-center opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                    <h3 className="font-serif text-2xl mb-4 text-primary">{item.title}</h3>
+                    <p className="text-foreground leading-relaxed font-medium">
+                      {item.detail}
+                    </p>
+                    <div className="mt-8 w-12 h-1 bg-primary/20 rounded-full" />
+                  </div>
+                  
+                  {/* Animated Border */}
+                  <motion.div 
+                    className="absolute inset-0 border-2 border-primary/0"
+                    animate={{ 
+                      borderColor: hoveredIndex === index ? "var(--primary)" : "transparent",
+                      opacity: hoveredIndex === index ? 0.5 : 0
+                    }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </section>
+
           <section className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <h2 className="font-serif text-4xl">The Disconnect</h2>
