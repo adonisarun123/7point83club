@@ -1,7 +1,9 @@
 import Layout from "@/components/Layout";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Activity, Moon, Sun, Trees } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
+import { cn } from "@/lib/utils";
 
 const principles = [
   {
@@ -32,6 +34,18 @@ const principles = [
 
 export default function Philosophy() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ align: "start", loop: false });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    setScrollSnaps(emblaApi.scrollSnapList());
+    emblaApi.on("select", () => {
+      setSelectedIndex(emblaApi.selectedScrollSnap());
+    });
+  }, [emblaApi]);
 
   return (
     <Layout>
@@ -68,19 +82,21 @@ export default function Philosophy() {
           <section>
             <div className="text-center mb-16">
               <h2 className="font-serif text-4xl md:text-5xl mb-6">The Science of Connection</h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Hover (or tap) over the pillars below to explore the biological mechanisms behind our philosophy.
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto hidden md:block">
+                Hover over the pillars below to explore the biological mechanisms behind our philosophy.
+              </p>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto md:hidden">
+                Swipe to explore the biological mechanisms behind our philosophy. Tap for details.
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Desktop Grid */}
+            <div className="hidden md:grid grid-cols-3 gap-8">
               {principles.map((item, index) => (
                 <motion.div
                   key={item.id}
                   onHoverStart={() => setActiveIndex(index)}
                   onHoverEnd={() => setActiveIndex(null)}
-                  onClick={() => setActiveIndex(activeIndex === index ? null : index)}
-                  whileTap={{ scale: 0.98 }}
                   className="relative h-[400px] bg-card border border-border rounded-sm overflow-hidden cursor-pointer group"
                 >
                   {/* Default State */}
@@ -124,6 +140,75 @@ export default function Philosophy() {
                   />
                 </motion.div>
               ))}
+            </div>
+
+            {/* Mobile Carousel */}
+            <div className="md:hidden overflow-hidden" ref={emblaRef}>
+              <div className="flex -ml-4">
+                {principles.map((item, index) => (
+                  <div key={item.id} className="flex-[0_0_85%] min-w-0 pl-4">
+                    <motion.div
+                      onClick={() => setActiveIndex(activeIndex === index ? null : index)}
+                      whileTap={{ scale: 0.98 }}
+                      className="relative h-[400px] bg-card border border-border rounded-sm overflow-hidden"
+                    >
+                      {/* Default State */}
+                      <motion.div 
+                        className="absolute inset-0 p-8 flex flex-col items-center justify-center text-center"
+                        animate={{ opacity: activeIndex === index ? 0 : 1 }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <div className="mb-6 text-primary p-4 bg-primary/5 rounded-full">
+                          {item.icon}
+                        </div>
+                        <h3 className="font-serif text-2xl mb-2">{item.title}</h3>
+                        <span className="text-xs uppercase tracking-widest text-muted-foreground mb-6">{item.subtitle}</span>
+                        <p className="text-muted-foreground leading-relaxed">
+                          {item.description}
+                        </p>
+                      </motion.div>
+
+                      {/* Active State */}
+                      <motion.div 
+                        className="absolute inset-0 bg-primary/5 p-8 flex flex-col items-center justify-center text-center"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: activeIndex === index ? 1 : 0 }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <h3 className="font-serif text-2xl mb-4 text-primary">{item.title}</h3>
+                        <p className="text-foreground leading-relaxed font-medium">
+                          {item.detail}
+                        </p>
+                        <div className="mt-8 w-12 h-1 bg-primary/20 rounded-full" />
+                      </motion.div>
+                      
+                      {/* Active Border */}
+                      <motion.div 
+                        className="absolute inset-0 border-2 border-primary/0"
+                        animate={{ 
+                          borderColor: activeIndex === index ? "var(--primary)" : "transparent",
+                          opacity: activeIndex === index ? 0.5 : 0
+                        }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    </motion.div>
+                  </div>
+                ))}
+              </div>
+              
+              {/* Carousel Dots */}
+              <div className="flex justify-center gap-2 mt-6">
+                {scrollSnaps.map((_, index) => (
+                  <button
+                    key={index}
+                    className={cn(
+                      "w-2 h-2 rounded-full transition-all duration-300",
+                      index === selectedIndex ? "bg-primary w-6" : "bg-border"
+                    )}
+                    onClick={() => emblaApi?.scrollTo(index)}
+                  />
+                ))}
+              </div>
             </div>
           </section>
 
