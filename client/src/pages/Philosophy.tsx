@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { Activity, Moon, Sun, Trees } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import { cn } from "@/lib/utils";
+import BinauralBeat from "@/components/BinauralBeat";
+import FrequencyVisualizer from "@/components/FrequencyVisualizer";
 
 const principles = [
   {
@@ -68,13 +70,18 @@ export default function Philosophy() {
           </motion.div>
         </div>
 
-        <div className="w-full h-[60vh] relative overflow-hidden mb-24">
+        <div className="w-full h-[60vh] relative overflow-hidden mb-24 group">
           <img 
             src="/images/philosophy-resonance.jpg" 
             alt="Schumann Resonance Visualization" 
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-transform duration-[20s] group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-black/20" />
+          
+          {/* Audio Control Overlay */}
+          <div className="absolute bottom-8 right-8 z-10">
+            <BinauralBeat />
+          </div>
         </div>
 
         <div className="container max-w-6xl mx-auto space-y-32">
@@ -220,18 +227,20 @@ export default function Philosophy() {
                 drown out the Earth's natural signal. This dissonance creates stress, anxiety, and a feeling of being "unmoored."
               </p>
             </div>
-            <div className="aspect-square bg-muted/30 rounded-full flex items-center justify-center border border-border p-12 relative overflow-hidden">
-               <div className="absolute inset-0 border-[1px] border-primary/20 rounded-full scale-50 animate-ping duration-[3s]" />
-               <div className="absolute inset-0 border-[1px] border-primary/20 rounded-full scale-75 animate-ping duration-[3s] delay-700" />
-               <div className="absolute inset-0 border-[1px] border-primary/20 rounded-full scale-90 animate-ping duration-[3s] delay-1000" />
-               <span className="font-serif text-6xl text-primary/50">Chaos</span>
+            <div className="aspect-square bg-muted/30 rounded-full flex items-center justify-center border border-border relative overflow-hidden">
+               <div className="absolute inset-0 opacity-30">
+                 <FrequencyVisualizer mode="chaos" />
+               </div>
+               <span className="font-serif text-6xl text-primary/50 relative z-10">Chaos</span>
             </div>
           </section>
 
           <section className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center md:flex-row-reverse">
-            <div className="order-2 md:order-1 aspect-square bg-primary/5 rounded-full flex items-center justify-center border border-primary/20 p-12 relative overflow-hidden">
-               <div className="w-full h-full rounded-full bg-primary/10 animate-pulse duration-[7.83s]" />
-               <span className="absolute font-serif text-6xl text-primary">7.83Hz</span>
+            <div className="order-2 md:order-1 aspect-square bg-primary/5 rounded-full flex items-center justify-center border border-primary/20 relative overflow-hidden">
+               <div className="absolute inset-0 opacity-40">
+                 <FrequencyVisualizer mode="coherent" />
+               </div>
+               <span className="absolute font-serif text-6xl text-primary z-10">7.83Hz</span>
             </div>
             <div className="order-1 md:order-2 space-y-6">
               <h2 className="font-serif text-4xl">The Re-alignment</h2>
