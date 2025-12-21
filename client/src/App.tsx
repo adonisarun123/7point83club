@@ -16,6 +16,7 @@ const Journal = lazy(() => import("./pages/Journal"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const Terms = lazy(() => import("./pages/Terms"));
+const Calendar = lazy(() => import("./pages/Calendar"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Loading component
@@ -43,6 +44,7 @@ function Router() {
         <Route path={"/faq"} component={FAQ} />
         <Route path={"/privacy"} component={Privacy} />
         <Route path={"/terms"} component={Terms} />
+        <Route path={"/calendar"} component={Calendar} />
         <Route path={"/404"} component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />

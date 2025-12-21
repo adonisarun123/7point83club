@@ -272,7 +272,7 @@ export default function Home() {
             >
               Start Application
             </Button>
-            <Link href="/retreats">
+            <Link href="/calendar">
               <Button size="lg" variant="outline" className="rounded-none px-10 h-16 text-xl">
                 View Calendar
               </Button>
