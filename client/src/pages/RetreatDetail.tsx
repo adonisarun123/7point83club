@@ -4,10 +4,13 @@ import { retreats } from "@/data/retreats";
 import { motion } from "framer-motion";
 import { ArrowLeft, Calendar, Check, Clock, MapPin, Sparkles } from "lucide-react";
 import { Link, useRoute } from "wouter";
+import BookingForm from "@/components/BookingForm";
+import { useState } from "react";
 
 export default function RetreatDetail() {
   const [match, params] = useRoute("/retreats/:id");
   const retreat = retreats.find((r) => r.id === params?.id);
+  const [isBookingFormOpen, setIsBookingFormOpen] = useState(false);
 
   if (!retreat) {
     return (
@@ -140,11 +143,13 @@ export default function RetreatDetail() {
             </div>
 
             <div className="space-y-4 pt-4 border-t border-border">
-              <Link href="/retreats">
-                <Button size="lg" className="w-full rounded-none bg-primary hover:bg-primary/90 text-primary-foreground h-14 text-lg">
-                  Apply for Spot
-                </Button>
-              </Link>
+              <Button
+                size="lg"
+                className="w-full rounded-none bg-primary hover:bg-primary/90 text-primary-foreground h-14 text-lg"
+                onClick={() => setIsBookingFormOpen(true)}
+              >
+                Apply for Spot
+              </Button>
               <p className="text-xs text-center text-muted-foreground">
                 Limited to 12 participants. <br />
                 ₹10,000 deposit required to secure booking.
@@ -153,6 +158,12 @@ export default function RetreatDetail() {
           </div>
         </div>
       </div>
+
+      <BookingForm
+        isOpen={isBookingFormOpen}
+        onClose={() => setIsBookingFormOpen(false)}
+        preselectedRetreatId={retreat?.id}
+      />
     </Layout>
   );
 }
