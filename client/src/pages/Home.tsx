@@ -261,12 +261,16 @@ export default function Home() {
             Applications are open for the upcoming season.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6 pt-4">
-            <Button size="lg" className="rounded-none bg-primary hover:bg-primary/90 text-primary-foreground px-10 h-16 text-xl">
-              Start Application
-            </Button>
-            <Button size="lg" variant="outline" className="rounded-none px-10 h-16 text-xl">
-              View Calendar
-            </Button>
+            <Link href="/retreats">
+              <Button size="lg" className="rounded-none bg-primary hover:bg-primary/90 text-primary-foreground px-10 h-16 text-xl">
+                Start Application
+              </Button>
+            </Link>
+            <Link href="/retreats">
+              <Button size="lg" variant="outline" className="rounded-none px-10 h-16 text-xl">
+                View Calendar
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

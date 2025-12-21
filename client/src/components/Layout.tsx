@@ -34,8 +34,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out border-b border-transparent",
-          isScrolled 
-            ? "bg-background/95 backdrop-blur-md py-4 border-border/40 shadow-sm" 
+          isScrolled
+            ? "bg-background/95 backdrop-blur-md py-4 border-border/40 shadow-sm"
             : "bg-gradient-to-b from-black/50 to-transparent py-6"
         )}
       >
@@ -62,9 +62,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </a>
               </Link>
             ))}
-            <Button variant="default" className="rounded-none bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-6">
-              Apply Now
-            </Button>
+            <Link href="/retreats">
+              <Button variant="default" className="rounded-none bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-6">
+                Apply Now
+              </Button>
+            </Link>
           </nav>
 
           {/* Mobile Toggle */}
@@ -94,9 +96,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </a>
           </Link>
         ))}
-        <Button size="lg" className="mt-8 rounded-none bg-primary text-primary-foreground px-8 text-lg">
-          Apply Now
-        </Button>
+        <Link href="/retreats">
+          <Button size="lg" className="mt-8 rounded-none bg-primary text-primary-foreground px-8 text-lg">
+            Apply Now
+          </Button>
+        </Link>
       </div>
 
       {/* Main Content */}
@@ -146,7 +150,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </div>
           </div>
         </div>
-        
+
         <div className="container mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/40 uppercase tracking-wider">
           <p>© 2025 7point83 Club. All rights reserved.</p>
           <div className="flex gap-8">
