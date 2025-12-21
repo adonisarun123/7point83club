@@ -127,7 +127,7 @@ export default function Privacy() {
                                 If you have questions about this Privacy Policy or wish to exercise your rights, please contact us:
                             </p>
                             <div className="bg-muted/30 p-6 rounded-sm">
-                                <p className="text-foreground mb-2"><strong>Email:</strong> privacy@7point83.club</p>
+                                <p className="text-foreground mb-2"><strong>Email:</strong> 7point83club@gmail.com</p>
                                 <p className="text-foreground mb-2"><strong>Phone:</strong> +91 80 1234 5678</p>
                                 <p className="text-foreground"><strong>Address:</strong> Bengaluru, Karnataka, India</p>
                             </div>

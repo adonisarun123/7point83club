@@ -118,8 +118,8 @@ export default function FAQ() {
                         </h1>
                         <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-light leading-relaxed">
                             Have a question not answered here? Reach out to us at{" "}
-                            <a href="mailto:hello@7point83.club" className="text-primary hover:underline">
-                                hello@7point83.club
+                            <a href="mailto:7point83club@gmail.com" className="text-primary hover:underline">
+                                7point83club@gmail.com
                             </a>
                         </p>
                     </div>
@@ -156,7 +156,7 @@ export default function FAQ() {
                             We're here to help. Get in touch with our team.
                         </p>
                         <a
-                            href="mailto:hello@7point83.club"
+                            href="mailto:7point83club@gmail.com"
                             className="inline-block bg-primary text-primary-foreground px-8 py-3 rounded-none hover:bg-primary/90 transition-colors font-medium"
                         >
                             Contact Us

@@ -27,7 +27,7 @@ export default function SchemaMarkup({ type = "home", data }: SchemaMarkupProps)
             "@type": "ContactPoint",
             "telephone": "+91-80-1234-5678",
             "contactType": "Customer Service",
-            "email": "hello@7point83.club",
+            "email": "7point83club@gmail.com",
             "availableLanguage": ["English", "Hindi"]
         },
         "sameAs": [
@@ -74,7 +74,7 @@ export default function SchemaMarkup({ type = "home", data }: SchemaMarkupProps)
         },
         "url": baseUrl,
         "telephone": "+91-80-1234-5678",
-        "email": "hello@7point83.club",
+        "email": "7point83club@gmail.com",
         "priceRange": "₹₹₹",
         "openingHoursSpecification": {
             "@type": "OpeningHoursSpecification",
