@@ -35,7 +35,7 @@ export default function RetreatDetail() {
         />
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-        
+
         <div className="absolute bottom-0 left-0 w-full p-8 md:p-16">
           <div className="container">
             <motion.div
@@ -140,9 +140,11 @@ export default function RetreatDetail() {
             </div>
 
             <div className="space-y-4 pt-4 border-t border-border">
-              <Button size="lg" className="w-full rounded-none bg-primary hover:bg-primary/90 text-primary-foreground h-14 text-lg">
-                Apply for Spot
-              </Button>
+              <Link href="/retreats">
+                <Button size="lg" className="w-full rounded-none bg-primary hover:bg-primary/90 text-primary-foreground h-14 text-lg">
+                  Apply for Spot
+                </Button>
+              </Link>
               <p className="text-xs text-center text-muted-foreground">
                 Limited to 12 participants. <br />
                 ₹10,000 deposit required to secure booking.
