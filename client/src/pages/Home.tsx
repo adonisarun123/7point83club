@@ -5,10 +5,12 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import BinauralBeat from "@/components/BinauralBeat";
 import SchemaMarkup from "@/components/SchemaMarkup";
+import BookingForm from "@/components/BookingForm";
 import { useState } from "react";
 
 export default function Home() {
   const [isAmbiencePlaying, setIsAmbiencePlaying] = useState(false);
+  const [isBookingFormOpen, setIsBookingFormOpen] = useState(false);
 
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
@@ -263,11 +265,13 @@ export default function Home() {
             Applications are open for the upcoming season.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6 pt-4">
-            <Link href="/retreats">
-              <Button size="lg" className="rounded-none bg-primary hover:bg-primary/90 text-primary-foreground px-10 h-16 text-xl">
-                Start Application
-              </Button>
-            </Link>
+            <Button
+              size="lg"
+              className="rounded-none bg-primary hover:bg-primary/90 text-primary-foreground px-10 h-16 text-xl"
+              onClick={() => setIsBookingFormOpen(true)}
+            >
+              Start Application
+            </Button>
             <Link href="/retreats">
               <Button size="lg" variant="outline" className="rounded-none px-10 h-16 text-xl">
                 View Calendar
@@ -276,6 +280,11 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <BookingForm
+        isOpen={isBookingFormOpen}
+        onClose={() => setIsBookingFormOpen(false)}
+      />
     </Layout>
   );
 }
