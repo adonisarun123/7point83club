@@ -33,6 +33,17 @@ const retreatColors: Record<string, { bg: string; border: string; text: string }
         border: "border-emerald-500",
         text: "text-emerald-700 dark:text-emerald-300",
     },
+    // Default fallback color
+    "default": {
+        bg: "bg-gray-100 dark:bg-gray-900/30",
+        border: "border-gray-500",
+        text: "text-gray-700 dark:text-gray-300",
+    },
+};
+
+// Helper function to get color with fallback
+const getRetreatColor = (retreatId: string) => {
+    return retreatColors[retreatId] || retreatColors["default"];
 };
 
 interface CalendarEvent {
@@ -57,7 +68,7 @@ export default function RetreatCalendar() {
             title: retreat?.title || "Retreat",
             startDate: new Date(program.startDate),
             endDate: new Date(program.endDate),
-            color: retreatColors[program.retreatId] || retreatColors["weekend-reset"],
+            color: getRetreatColor(program.retreatId),
         };
     });
 
@@ -149,8 +160,8 @@ export default function RetreatCalendar() {
 
             {/* Legend */}
             <div className="flex flex-wrap gap-4 p-4 bg-muted/30 rounded-sm">
-                {retreats.slice(0, 3).map((retreat) => {
-                    const colors = retreatColors[retreat.id];
+                {retreats.filter(r => retreatColors[r.id]).map((retreat) => {
+                    const colors = getRetreatColor(retreat.id);
                     return (
                         <div key={retreat.id} className="flex items-center gap-2">
                             <div className={`w-4 h-4 rounded ${colors.bg} border-2 ${colors.border}`} />
@@ -194,8 +205,8 @@ export default function RetreatCalendar() {
                                     <>
                                         <div
                                             className={`text-sm font-medium mb-2 ${isToday
-                                                    ? "w-7 h-7 flex items-center justify-center rounded-full bg-primary text-primary-foreground"
-                                                    : "text-foreground"
+                                                ? "w-7 h-7 flex items-center justify-center rounded-full bg-primary text-primary-foreground"
+                                                : "text-foreground"
                                                 }`}
                                         >
                                             {day}
