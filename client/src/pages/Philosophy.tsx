@@ -73,7 +73,7 @@ export default function Philosophy() {
 
         <div className="w-full h-[60vh] relative overflow-hidden mb-24 group">
           <img 
-            src="/images/philosophy-resonance.jpg" 
+            src="/images/philosophy-resonance.webp" 
             alt="Schumann Resonance Visualization" 
             className="w-full h-full object-cover transition-transform duration-[20s] group-hover:scale-105"
           />

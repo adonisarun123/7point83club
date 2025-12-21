@@ -6,7 +6,29 @@
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <title>7point83 Club - Redesigned</title>    
+    
+    <!-- Primary Meta Tags -->
+    <title>7point83 Club - Realign Your Rhythm with Earth's Heartbeat</title>
+    <meta name="title" content="7point83 Club - Realign Your Rhythm with Earth's Heartbeat" />
+    <meta name="description" content="Small-group, eco-friendly wellness retreats across India. Mindful movement, nature immersion, and qualified therapies to reset body and mind at 7.83Hz - the Schumann Resonance." />
+    <meta name="keywords" content="wellness retreat India, Schumann Resonance, 7.83Hz, mindfulness, yoga retreat, Ayurveda, digital detox, nature immersion, burnout recovery" />
+    <meta name="author" content="7point83 Club" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://7point83.club/" />
+    <meta property="og:title" content="7point83 Club - Realign Your Rhythm with Earth's Heartbeat" />
+    <meta property="og:description" content="Small-group, eco-friendly wellness retreats across India. Reset body and mind with mindful movement, nature, and qualified therapies." />
+    <meta property="og:image" content="/images/hero-forest.webp" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://7point83.club/" />
+    <meta property="twitter:title" content="7point83 Club - Realign Your Rhythm with Earth's Heartbeat" />
+    <meta property="twitter:description" content="Small-group, eco-friendly wellness retreats across India. Reset body and mind with mindful movement, nature, and qualified therapies." />
+    <meta property="twitter:image" content="/images/hero-forest.webp" />
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Satoshi:wght@300;400;500;700&family=Kaushan+Script&display=swap" rel="stylesheet" />
@@ -15,10 +37,16 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script
-      defer
-      src="%VITE_ANALYTICS_ENDPOINT%/umami"
-      data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
+    <!-- Analytics - Only load if environment variables are set -->
+    <script>
+      if (import.meta.env.VITE_ANALYTICS_ENDPOINT && import.meta.env.VITE_ANALYTICS_WEBSITE_ID) {
+        const script = document.createElement('script');
+        script.defer = true;
+        script.src = import.meta.env.VITE_ANALYTICS_ENDPOINT + '/umami';
+        script.setAttribute('data-website-id', import.meta.env.VITE_ANALYTICS_WEBSITE_ID);
+        document.head.appendChild(script);
+      }
+    </script>
   </body>
 
 </html>

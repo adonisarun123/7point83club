@@ -36,7 +36,7 @@ export default function About() {
             className="relative aspect-[4/5] lg:aspect-square"
           >
             <img 
-              src="/images/about-community.jpg" 
+              src="/images/about-community.webp" 
               alt="Community Gathering" 
               className="w-full h-full object-cover rounded-sm"
             />
@@ -56,9 +56,9 @@ export default function About() {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
               {[
-                { name: "Arjun & Mira", role: "Founders", img: "/images/founder-portrait.jpg" },
-                { name: "Dr. Lakshmi", role: "Ayurvedic Physician", img: "/images/meditation-close.jpg" }, // Placeholder reuse
-                { name: "Kabir", role: "Lead Yoga Teacher", img: "/images/retreat-yoga.jpg" } // Placeholder reuse
+                { name: "Arjun & Mira", role: "Founders", img: "/images/founder-portrait.webp" },
+                { name: "Dr. Lakshmi", role: "Ayurvedic Physician", img: "/images/meditation-close.webp" }, // Placeholder reuse
+                { name: "Kabir", role: "Lead Yoga Teacher", img: "/images/retreat-yoga.webp" } // Placeholder reuse
               ].map((member, i) => (
                 <div key={i} className="group text-center space-y-4">
                   <div className="aspect-[3/4] overflow-hidden relative mx-auto w-full max-w-sm">

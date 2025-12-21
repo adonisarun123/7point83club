@@ -3,8 +3,12 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Leaf, Wind, Mountain, Waves, Sun, Moon } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
+import BinauralBeat from "@/components/BinauralBeat";
+import { useState } from "react";
 
 export default function Home() {
+  const [isAmbiencePlaying, setIsAmbiencePlaying] = useState(false);
+
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -24,9 +28,9 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img 
-            src="/images/hero-forest.jpg" 
-            alt="Misty Indian Forest" 
+          <img
+            src="/images/hero-forest.webp"
+            alt="Misty Indian Forest"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/30 mix-blend-multiply" />
@@ -34,7 +38,7 @@ export default function Home() {
         </div>
 
         <div className="container relative z-10 pt-20 text-center text-white">
-          <motion.div 
+          <motion.div
             initial="initial"
             animate="animate"
             variants={staggerContainer}
@@ -47,28 +51,32 @@ export default function Home() {
               <span className="w-1 h-1 rounded-full bg-white/60" />
               <span>Resonance</span>
             </motion.div>
-            
+
             <motion.h1 variants={fadeIn} className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[0.9] md:leading-[0.9]">
               Realign your rhythm <br />
               <span className="italic font-light text-white/90">with the Earth's heartbeat.</span>
             </motion.h1>
-            
+
             <motion.p variants={fadeIn} className="max-w-xl mx-auto text-lg md:text-xl text-white/80 font-light leading-relaxed">
               Small-group, eco-friendly immersions across India that pair mindful movement, nature, and qualified therapies to reset body and mind.
             </motion.p>
-            
+
             <motion.div variants={fadeIn} className="pt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button size="lg" className="rounded-none bg-primary hover:bg-primary/90 text-primary-foreground px-8 h-14 text-lg min-w-[200px]">
-                Explore Retreats
-              </Button>
-              <Button size="lg" variant="outline" className="rounded-none border-white/30 text-white hover:bg-white hover:text-black px-8 h-14 text-lg min-w-[200px] backdrop-blur-sm">
-                Play Ambience <span className="ml-2 text-xs opacity-60">7.83Hz</span>
-              </Button>
+              <Link href="/retreats">
+                <Button size="lg" className="rounded-none bg-primary hover:bg-primary/90 text-primary-foreground px-8 h-14 text-lg min-w-[200px]">
+                  Explore Retreats
+                </Button>
+              </Link>
+              <BinauralBeat
+                baseFreq={200}
+                beatFreq={7.83}
+                onPlayChange={setIsAmbiencePlaying}
+              />
             </motion.div>
           </motion.div>
         </div>
-        
-        <motion.div 
+
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
@@ -82,7 +90,7 @@ export default function Home() {
       {/* Philosophy / Intro Section */}
       <section className="py-24 md:py-32 bg-background relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-        
+
         <div className="container grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
             <span className="text-primary font-medium tracking-widest uppercase text-sm">Our Philosophy</span>
@@ -92,15 +100,15 @@ export default function Home() {
             </h2>
             <div className="space-y-6 text-lg text-muted-foreground font-light leading-relaxed">
               <p>
-                Modern life operates at a frantic pace, disconnected from the natural rhythms that our bodies evolved with. 
+                Modern life operates at a frantic pace, disconnected from the natural rhythms that our bodies evolved with.
                 The Schumann Resonance—7.83Hz—is the electromagnetic heartbeat of the Earth.
               </p>
               <p>
-                Our retreats are designed to bring you back to this frequency. Through a blend of ancient wisdom and modern science, 
+                Our retreats are designed to bring you back to this frequency. Through a blend of ancient wisdom and modern science,
                 we help you disconnect from the noise and reconnect with your inner silence.
               </p>
             </div>
-            
+
             <div className="grid grid-cols-3 gap-8 pt-8 border-t border-border">
               <div>
                 <span className="block text-4xl font-serif mb-2">4</span>
@@ -116,12 +124,12 @@ export default function Home() {
               </div>
             </div>
           </div>
-          
+
           <div className="relative">
             <div className="aspect-[4/5] overflow-hidden rounded-sm">
-              <img 
-                src="/images/meditation-close.jpg" 
-                alt="Meditation Mudra" 
+              <img
+                src="/images/meditation-close.webp"
+                alt="Meditation Mudra"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700 ease-out"
               />
             </div>
@@ -185,7 +193,7 @@ export default function Home() {
                   <div className="w-12 h-[1px] bg-current opacity-20" />
                   <p className="text-sm opacity-80 leading-relaxed">{item.desc}</p>
                 </div>
-                
+
                 <div className="space-y-4">
                   <p className="font-serif text-xl">{item.price}</p>
                   <Button variant="ghost" className="w-full justify-between border border-current/20 hover:bg-current/5 group-hover:border-current/40">
@@ -202,14 +210,14 @@ export default function Home() {
       <section className="py-0 relative bg-foreground text-background overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[80vh]">
           <div className="relative h-[50vh] lg:h-auto">
-            <img 
-              src="/images/retreat-yoga.jpg" 
-              alt="Yoga Pavilion" 
+            <img
+              src="/images/retreat-yoga.webp"
+              alt="Yoga Pavilion"
               className="absolute inset-0 w-full h-full object-cover opacity-80"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-foreground/80 to-transparent lg:bg-gradient-to-t" />
           </div>
-          
+
           <div className="flex flex-col justify-center p-12 md:p-24 space-y-12">
             <div className="space-y-6">
               <span className="text-primary font-medium tracking-widest uppercase text-sm">Core Rituals</span>
@@ -241,9 +249,9 @@ export default function Home() {
       {/* CTA Section */}
       <section className="py-32 bg-background text-center relative overflow-hidden">
         <div className="absolute inset-0 opacity-5 pointer-events-none">
-           {/* Abstract background pattern could go here */}
+          {/* Abstract background pattern could go here */}
         </div>
-        
+
         <div className="container max-w-3xl mx-auto space-y-10 relative z-10">
           <h2 className="font-serif text-5xl md:text-7xl text-foreground">
             Ready to reset?

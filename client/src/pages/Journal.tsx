@@ -8,28 +8,28 @@ const articles = [
     category: "Science",
     date: "Oct 12, 2024",
     excerpt: "Understanding the biological impact of the Schumann Resonance on human circadian rhythms.",
-    image: "/images/philosophy-resonance.jpg"
+    image: "/images/philosophy-resonance.webp"
   },
   {
     title: "The Art of Doing Nothing: Niksen in the Indian Context",
     category: "Lifestyle",
     date: "Sep 28, 2024",
     excerpt: "How the Dutch concept of Niksen translates to the Indian philosophy of 'Shunya' or emptiness.",
-    image: "/images/journal-hero.jpg"
+    image: "/images/journal-hero.webp"
   },
   {
     title: "Seasonal Eating: A Guide to Monsoon Nutrition",
     category: "Nutrition",
     date: "Aug 15, 2024",
     excerpt: "Ayurvedic principles for maintaining digestive fire (Agni) during the rainy season.",
-    image: "/images/mindful-eating.jpg"
+    image: "/images/mindful-eating.webp"
   },
   {
     title: "Digital Detox: 3 Days to Reclaim Your Attention",
     category: "Practice",
     date: "Jul 04, 2024",
     excerpt: "A practical guide to unplugging without losing your mind (or your job).",
-    image: "/images/meditation-close.jpg"
+    image: "/images/meditation-close.webp"
   }
 ];
 
@@ -53,11 +53,19 @@ export default function Journal() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
           {articles.map((article, i) => (
-            <article key={i} className="group cursor-pointer space-y-6">
+            <article
+              key={i}
+              className="group cursor-pointer space-y-6"
+              onClick={() => {
+                // In a real implementation, this would navigate to the article detail page
+                // For now, we'll show a toast notification
+                alert(`Article "${article.title}" - Full article coming soon!`);
+              }}
+            >
               <div className="aspect-[16/9] overflow-hidden rounded-sm">
-                <img 
-                  src={article.image} 
-                  alt={article.title} 
+                <img
+                  src={article.image}
+                  alt={article.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
