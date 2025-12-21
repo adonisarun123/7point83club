@@ -4,6 +4,7 @@ import { ArrowRight, Leaf, Wind, Mountain, Waves, Sun, Moon } from "lucide-react
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import BinauralBeat from "@/components/BinauralBeat";
+import SchemaMarkup from "@/components/SchemaMarkup";
 import { useState } from "react";
 
 export default function Home() {
@@ -25,6 +26,7 @@ export default function Home() {
 
   return (
     <Layout>
+      <SchemaMarkup type="home" />
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
