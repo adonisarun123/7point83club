@@ -1,39 +1,16 @@
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-
-const articles = [
-  {
-    title: "Why 7.83Hz Matters for Your Nervous System",
-    category: "Science",
-    date: "Oct 12, 2024",
-    excerpt: "Understanding the biological impact of the Schumann Resonance on human circadian rhythms.",
-    image: "/images/philosophy-resonance.webp"
-  },
-  {
-    title: "The Art of Doing Nothing: Niksen in the Indian Context",
-    category: "Lifestyle",
-    date: "Sep 28, 2024",
-    excerpt: "How the Dutch concept of Niksen translates to the Indian philosophy of 'Shunya' or emptiness.",
-    image: "/images/journal-hero.webp"
-  },
-  {
-    title: "Seasonal Eating: A Guide to Monsoon Nutrition",
-    category: "Nutrition",
-    date: "Aug 15, 2024",
-    excerpt: "Ayurvedic principles for maintaining digestive fire (Agni) during the rainy season.",
-    image: "/images/mindful-eating.webp"
-  },
-  {
-    title: "Digital Detox: 3 Days to Reclaim Your Attention",
-    category: "Practice",
-    date: "Jul 04, 2024",
-    excerpt: "A practical guide to unplugging without losing your mind (or your job).",
-    image: "/images/meditation-close.webp"
-  }
-];
+import { journalArticles, categories } from "@/data/journalArticles";
+import { useState } from "react";
 
 export default function Journal() {
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+
+  const filteredArticles = selectedCategory === "All"
+    ? journalArticles
+    : journalArticles.filter(article => article.category === selectedCategory);
+
   return (
     <Layout>
       <div className="pt-32 pb-20 container">
@@ -41,20 +18,29 @@ export default function Journal() {
           <div className="space-y-4">
             <span className="text-primary font-medium tracking-widest uppercase text-sm">The Journal</span>
             <h1 className="font-serif text-5xl md:text-7xl text-foreground">Notes from the field.</h1>
+            <p className="text-muted-foreground text-lg max-w-2xl">
+              Insights on nervous system regulation, ancient wisdom, and the science of transformation.
+            </p>
           </div>
-          <div className="flex gap-2">
-            {["All", "Science", "Lifestyle", "Nutrition", "Practice"].map((tag) => (
-              <Button key={tag} variant="outline" size="sm" className="rounded-full border-border hover:border-primary hover:text-primary">
-                {tag}
+          <div className="flex flex-wrap gap-2">
+            {categories.map((category) => (
+              <Button
+                key={category}
+                variant={selectedCategory === category ? "default" : "outline"}
+                size="sm"
+                className="rounded-full border-border hover:border-primary hover:text-primary"
+                onClick={() => setSelectedCategory(category)}
+              >
+                {category}
               </Button>
             ))}
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-          {articles.map((article, i) => (
+          {filteredArticles.map((article) => (
             <article
-              key={i}
+              key={article.id}
               className="group cursor-pointer space-y-6"
               onClick={() => {
                 // In a real implementation, this would navigate to the article detail page
@@ -74,6 +60,8 @@ export default function Journal() {
                   <span className="text-primary">{article.category}</span>
                   <span>•</span>
                   <span>{article.date}</span>
+                  <span>•</span>
+                  <span>{article.readTime}</span>
                 </div>
                 <h2 className="font-serif text-3xl md:text-4xl leading-tight group-hover:text-primary transition-colors">
                   {article.title}
@@ -90,6 +78,12 @@ export default function Journal() {
             </article>
           ))}
         </div>
+
+        {filteredArticles.length === 0 && (
+          <div className="text-center py-20">
+            <p className="text-muted-foreground text-lg">No articles found in this category.</p>
+          </div>
+        )}
       </div>
     </Layout>
   );
