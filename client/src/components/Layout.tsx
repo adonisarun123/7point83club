@@ -138,10 +138,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <h3 className="font-sans text-xs font-bold uppercase tracking-widest text-white/40">Contact</h3>
             <ul className="space-y-3 text-white/80">
               <li>7point83club@gmail.com</li>
-              <li>+91 80 1234 5678</li>
+              <li>+91-9740915193</li>
               <li className="pt-4">
                 <span className="block text-white/40 text-xs mb-1">Visiting</span>
-                Bengaluru + Rotating India Properties
+                Rotating Places/Destinations in India
               </li>
             </ul>
             <div className="pt-4 flex gap-4">

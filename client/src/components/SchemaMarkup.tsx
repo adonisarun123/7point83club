@@ -25,7 +25,7 @@ export default function SchemaMarkup({ type = "home", data }: SchemaMarkupProps)
         },
         "contactPoint": {
             "@type": "ContactPoint",
-            "telephone": "+91-80-1234-5678",
+            "telephone": "+91-9740915193",
             "contactType": "Customer Service",
             "email": "7point83club@gmail.com",
             "availableLanguage": ["English", "Hindi"]
@@ -73,7 +73,7 @@ export default function SchemaMarkup({ type = "home", data }: SchemaMarkupProps)
             "longitude": "77.5946"
         },
         "url": baseUrl,
-        "telephone": "+91-80-1234-5678",
+        "telephone": "+91-9740915193",
         "email": "7point83club@gmail.com",
         "priceRange": "₹₹₹",
         "openingHoursSpecification": {

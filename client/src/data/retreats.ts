@@ -1,218 +1,844 @@
-export const retreats = [
+// New retreat data structure based on 7point83 Club content
+export type RetreatKey = "anchor" | "flow" | "forge" | "void" | "convergence";
+
+export interface Retreat {
+  id: string;
+  key: RetreatKey;
+  title: string;
+  subtitle: string;
+  heroTagline: string;
+  duration: string;
+  location: string;
+  price: string;
+  image: string;
+  description: string;
+  longDescription: string;
+
+  // New structured sections
+  trustbar: string[];
+  story: {
+    eyebrow: string;
+    heading: string;
+    body: string[];
+  };
+  outcomes: {
+    heading: string;
+    bullets: string[];
+    note?: string;
+  };
+  whoFor: string[];
+  whoNotFor: string[];
+  applicationFlow: {
+    heading: string;
+    steps: {
+      title: string;
+      items: string[];
+    }[];
+  };
+  pricing: {
+    heading: string;
+    body: string[];
+    waitlist: string[];
+  };
+  faq: {
+    heading: string;
+    items: {
+      q: string;
+      a: string;
+    }[];
+  };
+  finalCta: {
+    heading: string;
+    body: string[];
+    ctas: {
+      label: string;
+      href: string;
+    }[];
+  };
+
+  // Legacy fields for compatibility
+  highlights: string[];
+  dailyFlow: { time: string; activity: string }[];
+  accommodation: string;
+  inclusions: string[];
+}
+
+export const retreats: Retreat[] = [
   {
-    id: "signature-rhythm",
-    title: "Signature Rhythm",
-    subtitle: "The Foundation",
-    duration: "5 Days",
-    location: "Coorg, Karnataka",
-    price: "₹29,000",
-    image: "/images/retreat-yoga.jpg",
-    description: "Balanced yoga, meditation, nature immersion, strength, and therapy support. The perfect introduction to the 7point83 lifestyle.",
-    longDescription: "Our Signature Rhythm retreat is designed to be the perfect entry point into the world of mindful living. Set in the lush coffee plantations of Coorg, this 5-day immersion strikes a delicate balance between activity and rest. You will learn the foundations of breathwork, engage in joint-friendly mobility sessions, and experience the healing power of forest bathing.",
-    tags: ["Beginner Friendly", "Nature", "Yoga"],
+    id: "the-anchor",
+    key: "anchor",
+    title: "The Anchor",
+    subtitle: "Foundation | Nervous System Reset",
+    heroTagline: "Reset the baseline. Restore the body's capacity to rest.",
+    duration: "5-7 Days",
+    location: "Undisclosed (Apply to Learn)",
+    price: "Apply for Pricing",
+    image: "/images/retreat-anchor.jpg",
+    description: "A physiological intervention for chronically overstimulated nervous systems. Designed for leaders who are functional but depleted.",
+    longDescription: "The Anchor is not a vacation. It is a physiological intervention for chronically overstimulated nervous systems. Designed for leaders and high performers who are functional but depleted, this retreat focuses on lowering baseline stress, restoring circadian rhythm alignment, and reintroducing genuine rest at a biological level.",
+
+    trustbar: [
+      "Apply-Only Access",
+      "Privacy-Protected Cohorts",
+      "Device-Free Environment",
+      "HRV Monitoring Available"
+    ],
+
+    story: {
+      eyebrow: "The Foundation",
+      heading: "When rest becomes a skill you've forgotten",
+      body: [
+        "There is no published itinerary. Anticipation itself is cognitive load. Upon arrival, devices are surrendered and external inputs are deliberately reduced.",
+        "Light, sound, pace, and environment are precisely controlled to allow the nervous system to downshift. You will not be asked to perform. Your body will do the work."
+      ]
+    },
+
+    outcomes: {
+      heading: "What Changes",
+      bullets: [
+        "Resting heart rate begins to normalize",
+        "Heart Rate Variability (HRV) increases, indicating improved stress resilience",
+        "Sleep onset occurs earlier with deeper REM cycles",
+        "Persistent 'wired but tired' sensation softens"
+      ]
+    },
+
+    whoFor: [
+      "Individuals experiencing burnout, chronic stress, or sleep disruption",
+      "Leaders who cannot mentally switch off",
+      "High performers seeking a biological reset before cognitive or emotional work",
+      "Those willing to be device-free"
+    ],
+
+    whoNotFor: [
+      "Anyone seeking entertainment or stimulation",
+      "Those unwilling to surrender devices",
+      "People looking for instant transformation without baseline change",
+      "First-time retreat participants seeking guidance or activity schedules"
+    ],
+
+    applicationFlow: {
+      heading: "Application Process",
+      steps: [
+        {
+          title: "Submit Application",
+          items: [
+            "Complete health and readiness questionnaire",
+            "Share your current stress patterns and sleep quality",
+            "Indicate preferred dates (if any)"
+          ]
+        },
+        {
+          title: "Review & Acceptance",
+          items: [
+            "Applications reviewed within 48-72 hours",
+            "Acceptance based on readiness, not application time",
+            "Receive private cohort details, dates, and pricing"
+          ]
+        },
+        {
+          title: "Confirmation",
+          items: [
+            "Secure your spot with deposit",
+            "Receive pre-retreat preparation guidelines",
+            "Join private cohort communication"
+          ]
+        }
+      ]
+    },
+
+    pricing: {
+      heading: "Investment",
+      body: [
+        "Pricing is disclosed in INR after acceptance.",
+        "All-inclusive: accommodation, meals, protocols, and support.",
+        "Limited to 12-15 participants per cohort."
+      ],
+      waitlist: [
+        "Waitlist priority based on readiness assessment",
+        "Early application does not guarantee priority",
+        "Cohorts run quarterly"
+      ]
+    },
+
+    faq: {
+      heading: "Common Questions",
+      items: [
+        {
+          q: "Do I need prior meditation or yoga experience?",
+          a: "No. The Anchor is designed for complete beginners. The focus is on physiological rest, not performance."
+        },
+        {
+          q: "Will I have access to my phone?",
+          a: "Devices are surrendered upon arrival and returned at departure. Emergency contact protocols are in place."
+        },
+        {
+          q: "What if I can't sleep without my phone?",
+          a: "This is precisely why you need this retreat. We provide analog alarm clocks and reading materials."
+        },
+        {
+          q: "Is this suitable for severe anxiety or depression?",
+          a: "The Anchor supports stress recovery but is not a substitute for clinical treatment. Please consult your healthcare provider."
+        }
+      ]
+    },
+
+    finalCta: {
+      heading: "Ready to reset?",
+      body: [
+        "The Anchor is for those who know they need to stop, but don't know how.",
+        "Applications are reviewed individually. Acceptance is based on readiness and fit."
+      ],
+      ctas: [
+        { label: "Apply for The Anchor", href: "/apply?retreat=anchor" },
+        { label: "Explore Other Retreats", href: "/retreats" }
+      ]
+    },
+
+    // Legacy compatibility fields
     highlights: [
-      "Daily Morning Yoga & Mobility",
-      "Guided Forest Bathing (Shinrin-yoku)",
-      "Introduction to Breathwork",
-      "Farm-to-Table Organic Meals",
-      "Evening Sound Healing Sessions"
+      "Device-free environment",
+      "Circadian rhythm optimization",
+      "HRV monitoring and feedback",
+      "Gentle movement and breathwork",
+      "Sleep hygiene protocols"
     ],
     dailyFlow: [
-      { time: "06:30 AM", activity: "Sunrise Prana (Breathwork) & Hydration" },
-      { time: "07:30 AM", activity: "Signature Mobility Flow" },
-      { time: "09:30 AM", activity: "Nourishing Breakfast" },
-      { time: "11:00 AM", activity: "Nature Immersion / Forest Walk" },
-      { time: "01:00 PM", activity: "Community Lunch" },
-      { time: "04:00 PM", activity: "Restorative Yoga / Nidra" },
-      { time: "07:00 PM", activity: "Dinner & Fire Circle" }
+      { time: "Variable", activity: "No fixed schedule - rhythm follows natural light cycles" },
+      { time: "Morning", activity: "Gentle awakening, sunlight exposure, light movement" },
+      { time: "Midday", activity: "Nourishing meals, rest periods, optional nature walks" },
+      { time: "Evening", activity: "Downshift protocols, minimal stimulation, early sleep window" }
     ],
-    accommodation: "Private cottages nestled within a 50-acre coffee estate. Each cottage is built with sustainable materials and features a private veranda overlooking the valley.",
+    accommodation: "Private rooms in a quiet, natural setting. Designed for sensory reduction and deep rest.",
     inclusions: [
-      "4 Nights Accommodation",
-      "All Meals & Beverages",
-      "All Classes & Workshops",
-      "Airport Transfers from Mangalore",
-      "Welcome Kit"
+      "All accommodation and meals",
+      "Device storage and security",
+      "HRV monitoring equipment (optional)",
+      "Post-retreat integration guide",
+      "Emergency contact protocols"
     ]
   },
+
   {
-    id: "sleep-stress-recovery",
-    title: "Sleep & Stress Recovery",
-    subtitle: "Deep Rest",
-    duration: "7 Days",
-    location: "Wayanad, Kerala",
-    price: "₹45,000",
-    image: "/images/hero-forest.jpg",
-    description: "Burnout reset with HRV-friendly routines and evening downshift protocols. Designed for high-performers needing deep rest.",
-    longDescription: "In a world that celebrates hustle, we invite you to celebrate rest. This retreat is scientifically designed to repair a dysregulated nervous system. Using protocols that improve Heart Rate Variability (HRV) and optimize circadian rhythms, we help you rediscover the art of deep, restorative sleep.",
-    tags: ["Burnout", "Sleep", "Relaxation"],
+    id: "the-flow",
+    key: "flow",
+    title: "The Flow",
+    subtitle: "Expansion | Cognitive Flexibility & Creativity",
+    heroTagline: "Restore mental range. Let insight return.",
+    duration: "7-10 Days",
+    location: "Undisclosed (Apply to Learn)",
+    price: "Apply for Pricing",
+    image: "/images/retreat-flow.jpg",
+    description: "Structured novelty and serious play to reintroduce cognitive flexibility. For minds that feel rigid, repetitive, or creatively blocked.",
+    longDescription: "The Flow is designed for minds that feel rigid, repetitive, or creatively blocked. This retreat uses structured novelty, serious play, and embodied problem-solving to reintroduce cognitive flexibility. Activities are not revealed in advance—predictability reinforces mental loops.",
+
+    trustbar: [
+      "Creative Profile Screening",
+      "Matched Cohorts",
+      "Embodied Learning",
+      "Zero Lectures"
+    ],
+
+    story: {
+      eyebrow: "The Expansion",
+      heading: "When your mind runs the same loops",
+      body: [
+        "By introducing safe but unfamiliar movement patterns and non-verbal challenges, the brain is forced out of habitual logic pathways.",
+        "This is not play for entertainment. It is play as neurological stimulus. You won't be told what to think—you'll be given conditions that make new thinking inevitable."
+      ]
+    },
+
+    outcomes: {
+      heading: "What Changes",
+      bullets: [
+        "Faster problem-solving speed",
+        "Reduction in mental fog and rumination",
+        "Increased sensory acuity",
+        "Post-retreat creative output and clarity"
+      ]
+    },
+
+    whoFor: [
+      "Founders, strategists, creators, and decision-makers",
+      "Individuals feeling mentally stuck or creatively constrained",
+      "Those open to embodied learning and ambiguity",
+      "People seeking insight without lectures or coaching"
+    ],
+
+    whoNotFor: [
+      "Anyone requiring predictability and structure",
+      "Those uncomfortable with physical movement or play",
+      "Individuals seeking intellectual instruction rather than experience",
+      "People unwilling to be surprised"
+    ],
+
+    applicationFlow: {
+      heading: "Application Process",
+      steps: [
+        {
+          title: "Creative Profile",
+          items: [
+            "Submit portfolio or work samples (optional)",
+            "Describe your current creative challenge",
+            "Share your relationship with play and novelty"
+          ]
+        },
+        {
+          title: "Cohort Matching",
+          items: [
+            "Applications reviewed for cognitive style fit",
+            "Cohorts matched by creative domain and readiness",
+            "Receive acceptance notification with cohort details"
+          ]
+        },
+        {
+          title: "Preparation",
+          items: [
+            "Minimal pre-retreat preparation required",
+            "Bring curiosity, not expectations",
+            "Comfortable movement clothing recommended"
+          ]
+        }
+      ]
+    },
+
+    pricing: {
+      heading: "Investment",
+      body: [
+        "Pricing disclosed in INR after acceptance.",
+        "Includes all activities, meals, and materials.",
+        "Limited to 10-12 participants per cohort."
+      ],
+      waitlist: [
+        "Waitlist access for fit-matched applicants",
+        "Cohorts run 3-4 times per year",
+        "Priority given to creative professionals in transition"
+      ]
+    },
+
+    faq: {
+      heading: "Common Questions",
+      items: [
+        {
+          q: "What kind of 'play' are we talking about?",
+          a: "Think improvisation, movement puzzles, spatial challenges, and collaborative problem-solving. Nothing childish, everything challenging."
+        },
+        {
+          q: "Do I need to be physically fit?",
+          a: "Moderate mobility is helpful, but activities are adaptable. This is about mental flexibility, not athletic performance."
+        },
+        {
+          q: "Will there be any traditional workshops or talks?",
+          a: "No. The Flow is experience-first. Insight comes from doing, not listening."
+        },
+        {
+          q: "Can I bring my own creative project to work on?",
+          a: "You can, but you won't have dedicated work time. The retreat is designed to create conditions for breakthrough, not execution."
+        }
+      ]
+    },
+
+    finalCta: {
+      heading: "Ready to break the pattern?",
+      body: [
+        "The Flow is for those who know they're capable of more, but feel trapped in familiar thinking.",
+        "Applications are reviewed for creative fit and readiness."
+      ],
+      ctas: [
+        { label: "Apply for The Flow", href: "/apply?retreat=flow" },
+        { label: "Explore Other Retreats", href: "/retreats" }
+      ]
+    },
+
     highlights: [
-      "Circadian Rhythm Reset Protocols",
-      "Advanced Yoga Nidra",
-      "Vagus Nerve Stimulation Exercises",
-      "Ayurvedic Abhyanga Massage",
-      "Digital Detox Environment"
+      "Structured novelty protocols",
+      "Non-verbal problem-solving",
+      "Movement-based learning",
+      "Cohort creative synergy",
+      "Zero predictability"
     ],
     dailyFlow: [
-      { time: "07:00 AM", activity: "Gentle Awakening & Sunlight Exposure" },
-      { time: "08:00 AM", activity: "Slow Flow Yoga" },
-      { time: "10:00 AM", activity: "Breakfast" },
-      { time: "11:30 AM", activity: "Workshop: The Science of Sleep" },
-      { time: "01:00 PM", activity: "Lunch" },
-      { time: "03:00 PM", activity: "Ayurvedic Therapy Session" },
-      { time: "08:00 PM", activity: "Candlelight Meditation & Sleep Tea" }
+      { time: "Variable", activity: "Schedule changes daily to prevent pattern recognition" },
+      { time: "Morning", activity: "Movement challenges, spatial puzzles, improvisation" },
+      { time: "Afternoon", activity: "Collaborative problem-solving, embodied learning" },
+      { time: "Evening", activity: "Reflection, integration, optional sharing circles" }
     ],
-    accommodation: "Eco-friendly earth ships designed for thermal comfort and silence. No Wi-Fi in rooms to ensure undisturbed rest.",
+    accommodation: "Shared and private spaces designed for creative collaboration and solo reflection.",
     inclusions: [
-      "6 Nights Accommodation",
-      "All Meals (Sleep-supportive menu)",
-      "2 Ayurvedic Massages",
-      "Personal Sleep Consultation",
-      "Post-Retreat Sleep Plan"
+      "All accommodation and meals",
+      "Materials and equipment for activities",
+      "Cohort matching and facilitation",
+      "Post-retreat integration session",
+      "Access to alumni creative network"
     ]
   },
+
   {
-    id: "gut-metabolic-reset",
-    title: "Gut & Metabolic Reset",
-    subtitle: "Inner Alchemy",
-    duration: "7 Days",
-    location: "Goa Hinterlands",
-    price: "₹48,000",
-    image: "/images/mindful-eating.jpg",
-    description: "Mindful eating rituals, kitchen workshops, and digestive-friendly movement. Rebuild your relationship with food.",
-    longDescription: "Health begins in the gut. This retreat combines modern nutritional science with ancient Ayurvedic wisdom. Far from the party beaches of Goa, our hinterland sanctuary offers a space to cleanse your palate and your system. You won't just eat healthy food; you'll learn how to prepare it and how to eat it with intention.",
-    tags: ["Detox", "Nutrition", "Wellness"],
+    id: "the-forge",
+    key: "forge",
+    title: "The Forge",
+    subtitle: "Resilience | Anti-Fragility Training",
+    heroTagline: "Capacity under pressure is trained, not imagined.",
+    duration: "7-14 Days",
+    location: "Undisclosed (Apply to Learn)",
+    price: "Apply for Pricing",
+    image: "/images/retreat-forge.jpg",
+    description: "Controlled stressors and deliberate recovery. Cold exposure, fasting, and silence within strict safety boundaries to train adaptation.",
+    longDescription: "The Forge introduces controlled, short-duration stressors followed by deliberate recovery. This is not about extremes—it is about precision. Cold exposure, load-bearing movement, fasting windows, and silence are applied within strict safety boundaries to train adaptation at the physiological and psychological level.",
+
+    trustbar: [
+      "Medical Screening Required",
+      "Safety-First Protocols",
+      "Professional Supervision",
+      "Small Cohorts (8-10)"
+    ],
+
+    story: {
+      eyebrow: "The Resilience",
+      heading: "When comfort becomes a cage",
+      body: [
+        "Protocols are not disclosed in advance to prevent mental rehearsal. Real resilience is built through real-time adaptation.",
+        "You will be challenged, but never endangered. Every stressor is measured, timed, and followed by structured recovery. This is training, not punishment."
+      ]
+    },
+
+    outcomes: {
+      heading: "What Changes",
+      bullets: [
+        "Faster stress recovery",
+        "Improved emotional regulation under pressure",
+        "Increased pain tolerance",
+        "Greater cardiovascular efficiency potential"
+      ]
+    },
+
+    whoFor: [
+      "Leaders operating in high-pressure environments",
+      "Individuals seeking resilience rather than comfort",
+      "Those medically fit for controlled adversity",
+      "People interested in capacity-building, not bravado"
+    ],
+
+    whoNotFor: [
+      "Anyone with untreated medical or psychological conditions",
+      "Individuals seeking luxury without challenge",
+      "Those chasing extremes or ego validation",
+      "People unwilling to follow strict safety protocols"
+    ],
+
+    applicationFlow: {
+      heading: "Application Process",
+      steps: [
+        {
+          title: "Health Screening",
+          items: [
+            "Complete comprehensive health questionnaire",
+            "Disclose cardiovascular, respiratory, and psychological history",
+            "Provide recent medical clearance if applicable"
+          ]
+        },
+        {
+          title: "Readiness Assessment",
+          items: [
+            "Phone or video interview to assess mental readiness",
+            "Review of current stress management practices",
+            "Acceptance based on safety and fit"
+          ]
+        },
+        {
+          title: "Pre-Retreat Preparation",
+          items: [
+            "Receive specific preparation protocols",
+            "Gradual cold exposure practice recommended",
+            "Nutrition and hydration guidelines provided"
+          ]
+        }
+      ]
+    },
+
+    pricing: {
+      heading: "Investment",
+      body: [
+        "Pricing disclosed in INR after acceptance.",
+        "Includes medical supervision, all protocols, and recovery support.",
+        "Strictly limited to 8-10 participants for safety."
+      ],
+      waitlist: [
+        "Waitlist maintained for qualified applicants",
+        "Cohorts run 2-3 times per year",
+        "Medical clearance required before confirmation"
+      ]
+    },
+
+    faq: {
+      heading: "Common Questions",
+      items: [
+        {
+          q: "Is this safe?",
+          a: "Yes. All protocols are supervised by trained professionals. Medical screening is mandatory, and safety ratios are strictly maintained."
+        },
+        {
+          q: "How cold is the cold exposure?",
+          a: "Temperatures and durations are individualized based on experience and tolerance. We start conservatively and progress safely."
+        },
+        {
+          q: "What if I can't complete a protocol?",
+          a: "You are always in control. You can pause or opt out of any activity. This is about building capacity, not proving toughness."
+        },
+        {
+          q: "Do I need prior experience with fasting or cold exposure?",
+          a: "No, but it helps. We provide gradual progression and education throughout the retreat."
+        }
+      ]
+    },
+
+    finalCta: {
+      heading: "Ready to build capacity?",
+      body: [
+        "The Forge is for those who want to expand what they're capable of, not prove what they already are.",
+        "Applications require medical screening and readiness assessment."
+      ],
+      ctas: [
+        { label: "Apply for The Forge", href: "/apply?retreat=forge" },
+        { label: "Explore Other Retreats", href: "/retreats" }
+      ]
+    },
+
     highlights: [
-      "Personalized Dosha Analysis",
-      "Cooking Masterclasses",
-      "Intermittent Fasting Protocols (Optional)",
-      "Digestive Breathwork",
-      "Herbal Gut Support"
+      "Cold exposure protocols",
+      "Fasting windows (optional)",
+      "Load-bearing movement",
+      "Silence periods",
+      "Recovery optimization"
     ],
     dailyFlow: [
-      { time: "06:00 AM", activity: "Warm Water & Cleansing Kriyas" },
-      { time: "07:00 AM", activity: "Metabolic Fire Yoga" },
-      { time: "09:00 AM", activity: "Probiotic Breakfast" },
-      { time: "11:00 AM", activity: "Cooking Class: Fermentation 101" },
-      { time: "01:00 PM", activity: "Mindful Lunch (Silent Eating)" },
-      { time: "05:00 PM", activity: "Sunset Walk" },
-      { time: "07:00 PM", activity: "Light Dinner (Soups & Broths)" }
+      { time: "Variable", activity: "Protocols vary daily to prevent adaptation" },
+      { time: "Morning", activity: "Cold exposure, breathwork, movement challenges" },
+      { time: "Midday", activity: "Recovery protocols, nutrition, rest" },
+      { time: "Afternoon", activity: "Load-bearing activities, optional fasting windows" },
+      { time: "Evening", activity: "Silence, reflection, recovery optimization" }
     ],
-    accommodation: "Heritage Portuguese villa restored with natural lime plaster. Shared and private rooms available.",
+    accommodation: "Functional, minimalist accommodations designed for recovery and rest.",
     inclusions: [
-      "6 Nights Accommodation",
-      "All Meals & Probiotics",
-      "3 Cooking Workshops",
-      "Nutritionist Consultation",
-      "Take-home Recipe Book"
+      "All accommodation and meals",
+      "Medical supervision and safety equipment",
+      "Cold exposure facilities",
+      "Recovery protocols and support",
+      "Post-retreat resilience plan"
     ]
   },
+
   {
-    id: "deep-work-focus",
-    title: "Deep Work & Focus",
-    subtitle: "Clarity of Mind",
-    duration: "11 Days",
-    location: "Himalayas (Manali Outskirts)",
-    price: "₹75,000",
-    image: "/images/meditation-close.jpg",
-    description: "Attention reset, screen detox, and clarity-building deep work. For creatives and leaders seeking a breakthrough.",
-    longDescription: "Distraction is the enemy of depth. This retreat is a structured container for you to do your life's best work—whether that's writing a book, coding a new project, or simply thinking clearly about your future. We provide the silence, the structure, and the sustenance; you provide the focus.",
-    tags: ["Digital Detox", "Focus", "Leadership"],
+    id: "the-void",
+    key: "void",
+    title: "The Void",
+    subtitle: "Transcendence | Silence & Clarity",
+    heroTagline: "Silence is not absence. It is signal.",
+    duration: "10-21 Days",
+    location: "Undisclosed (Apply to Learn)",
+    price: "Apply for Pricing",
+    image: "/images/retreat-void.jpg",
+    description: "Noble Silence: no speaking, devices, reading, or eye contact. The most advanced protocol for those who can sit with themselves fully.",
+    longDescription: "The Void is the most advanced protocol at 7point83 Club. This retreat follows Noble Silence: no speaking, no devices, no reading, no eye contact. By removing external inputs—auditory, visual, social—the mind is allowed to reorganize. What remains is signal without noise.",
+
+    trustbar: [
+      "Experience Required",
+      "Extremely Limited Acceptance",
+      "Absolute Confidentiality",
+      "No Guidance or Coaching"
+    ],
+
+    story: {
+      eyebrow: "The Transcendence",
+      heading: "When noise becomes unbearable",
+      body: [
+        "There is no coaching, guidance, or reassurance. This is a container for those who can sit with themselves fully.",
+        "You will face everything you've been avoiding. The retreat does not provide answers—it provides the conditions for you to find them yourself."
+      ]
+    },
+
+    outcomes: {
+      heading: "What Changes",
+      bullets: [
+        "Heightened clarity on life and leadership decisions",
+        "Emotional integration and release",
+        "Reduced dependence on stimulation",
+        "Renewed sensitivity to simple experiences"
+      ]
+    },
+
+    whoFor: [
+      "Leaders at major decision thresholds",
+      "Individuals experienced with solitude and silence",
+      "Those seeking clarity without external input",
+      "Participants comfortable without guidance"
+    ],
+
+    whoNotFor: [
+      "First-time retreat participants",
+      "Anyone currently experiencing acute instability",
+      "Individuals uncomfortable with silence or isolation",
+      "Those seeking coaching, therapy, or instruction"
+    ],
+
+    applicationFlow: {
+      heading: "Application Process",
+      steps: [
+        {
+          title: "Experience Verification",
+          items: [
+            "Demonstrate prior retreat or meditation experience",
+            "Describe your relationship with silence and solitude",
+            "Share what you're seeking from this experience"
+          ]
+        },
+        {
+          title: "Readiness Interview",
+          items: [
+            "In-depth conversation about psychological readiness",
+            "Assessment of current life circumstances and stability",
+            "Review of expectations and container agreements"
+          ]
+        },
+        {
+          title: "Acceptance & Preparation",
+          items: [
+            "Extremely limited acceptances per cohort",
+            "Receive detailed preparation guidelines",
+            "Sign confidentiality and consent agreements"
+          ]
+        }
+      ]
+    },
+
+    pricing: {
+      heading: "Investment",
+      body: [
+        "Pricing disclosed in INR after acceptance.",
+        "Includes all accommodation, meals, and container support.",
+        "Limited to 6-8 participants per cohort."
+      ],
+      waitlist: [
+        "Waitlist maintained for qualified, experienced applicants",
+        "Cohorts run 1-2 times per year",
+        "Acceptance based on experience and readiness, not timing"
+      ]
+    },
+
+    faq: {
+      heading: "Common Questions",
+      items: [
+        {
+          q: "What happens in an emergency?",
+          a: "Silent emergency protocols are in place. Staff are present and observant. You can signal for help at any time."
+        },
+        {
+          q: "Can I leave early if it's too intense?",
+          a: "Yes, but we encourage you to sit with discomfort first. Early departure is always an option."
+        },
+        {
+          q: "Is this a meditation retreat?",
+          a: "No. There is no formal meditation instruction. This is a container for silence, not a technique."
+        },
+        {
+          q: "How do I know if I'm ready?",
+          a: "If you're asking this question, you might not be. The Void is for those who know they need it."
+        }
+      ]
+    },
+
+    finalCta: {
+      heading: "Ready to face the silence?",
+      body: [
+        "The Void is not for everyone. It is for those who have exhausted external solutions and are ready to turn inward.",
+        "Applications are reviewed with extreme care. Acceptance is rare."
+      ],
+      ctas: [
+        { label: "Apply for The Void", href: "/apply?retreat=void" },
+        { label: "Explore Other Retreats", href: "/retreats" }
+      ]
+    },
+
     highlights: [
-      "Strict Digital Detox",
-      "Daily 4-Hour Deep Work Blocks",
-      "Cognitive Enhancement Nutrition",
-      "Cold Plunge & Sauna",
-      "Evening Philosophical Discussions"
+      "Noble Silence (no speaking, devices, reading, eye contact)",
+      "Minimal external input",
+      "Self-directed practice",
+      "Emergency protocols in place",
+      "Post-retreat integration support"
     ],
     dailyFlow: [
-      { time: "06:00 AM", activity: "Cold Plunge & Breathwork" },
-      { time: "07:00 AM", activity: "Breakfast" },
-      { time: "08:00 AM", activity: "Deep Work Session I" },
-      { time: "12:00 PM", activity: "Movement Break" },
-      { time: "01:00 PM", activity: "Lunch" },
-      { time: "02:00 PM", activity: "Deep Work Session II or Nature Walk" },
-      { time: "06:00 PM", activity: "Sauna & Decompression" }
+      { time: "All Day", activity: "Noble Silence - no fixed schedule" },
+      { time: "Morning", activity: "Silent meals, personal practice, walking meditation" },
+      { time: "Afternoon", activity: "Solitude, rest, self-inquiry" },
+      { time: "Evening", activity: "Silent meals, early rest, darkness" }
     ],
-    accommodation: "Minimalist wood cabins with desk space facing the mountains. Designed for zero distraction.",
+    accommodation: "Private, isolated accommodations designed for complete solitude and silence.",
     inclusions: [
-      "10 Nights Accommodation",
-      "High-Performance Brain Food",
-      "Daily Sauna/Ice Bath Access",
-      "Group Accountability Sessions",
-      "Airport Transfers from Kullu"
+      "All accommodation and meals",
+      "Silent container support",
+      "Emergency protocols and staff presence",
+      "Post-retreat integration session",
+      "Lifetime confidentiality"
     ]
   },
+
   {
-    id: "traditional-rejuvenation",
-    title: "Traditional Rejuvenation",
-    subtitle: "Roots of Healing",
-    duration: "14 Days",
-    location: "Kerala Backwaters",
-    price: "₹1,10,000",
-    image: "/images/about-community.jpg",
-    description: "Ayurveda-inspired therapies, cleansing, and restorative movement. A deep dive into ancient healing traditions.",
-    longDescription: "Immerse yourself in the birthplace of Ayurveda. This 14-day journey is a serious commitment to healing. Under the guidance of experienced Vaidyas (Ayurvedic doctors), you will undergo a gentle detox (Panchakarma lite) supported by daily oil massages, medicated steam baths, and specific yoga practices.",
-    tags: ["Ayurveda", "Healing", "Therapy"],
+    id: "the-convergence",
+    key: "convergence" as RetreatKey,
+    title: "The Convergence",
+    subtitle: "Biennial | Community Synchronization",
+    heroTagline: "Isolation repairs the individual. Synchronization repairs the collective.",
+    duration: "3 Days (Every 2 Years)",
+    location: "Undisclosed (Apply to Learn)",
+    price: "Apply for Pricing",
+    image: "/images/retreat-convergence.jpg",
+    description: "A large-scale community gathering for collective synchronization. The only large-scale retreat, held once every two years.",
+    longDescription: "The 7.83 Convergence is the only large-scale gathering hosted by 7point83 Club. While all other retreats are intentionally small and inward-facing, the Convergence is about collective synchronization. This is not a festival. It is not a conference. It is a temporary village designed to recalibrate the individual through shared rhythm, shared silence, and shared presence.",
+
+    trustbar: [
+      "Once Every 2 Years",
+      "Alumni Priority",
+      "Large-Scale Coherence",
+      "Invite or Apply-Only"
+    ],
+
+    story: {
+      eyebrow: "The Biennial Gathering",
+      heading: "When the collective needs recalibration",
+      body: [
+        "Held once every two years, the Convergence brings together past participants and approved applicants across all four protocols—Anchor, Flow, Forge, and Void—into a single, carefully structured, three-day experience.",
+        "For three days, the nervous system experiences what regulated tribal living feels like. No hierarchy. No titles. No stages. Just shared rhythm, shared silence, and shared presence."
+      ]
+    },
+
+    outcomes: {
+      heading: "What Changes",
+      bullets: [
+        "Sustained reduction in loneliness post-event",
+        "Heightened trust and openness with others",
+        "Emotional release without catharsis or drama",
+        "A felt sense of 'being part of something' without obligation",
+        "Increased calm in social environments for weeks or months afterward"
+      ],
+      note: "Outcomes vary by individual baseline and readiness."
+    },
+
+    whoFor: [
+      "Alumni of 7point83 retreats seeking reconnection",
+      "Leaders who operate in isolation and want regulated community",
+      "Individuals curious about collective coherence without chaos",
+      "People who value depth over entertainment"
+    ],
+
+    whoNotFor: [
+      "Those seeking a festival, party, or networking event",
+      "Anyone uncomfortable in large groups without structure",
+      "People needing constant stimulation or personal attention",
+      "Individuals unwilling to surrender devices for extended periods"
+    ],
+
+    applicationFlow: {
+      heading: "Application & Selection",
+      steps: [
+        {
+          title: "Access Routes",
+          items: [
+            "Invitation to past retreat participants",
+            "Application with readiness screening",
+            "Cohort balancing for energy, experience, and stability"
+          ]
+        },
+        {
+          title: "Priority Criteria",
+          items: [
+            "Prior retreat alumni receive priority",
+            "Demonstrated emotional regulation and self-responsibility",
+            "Alignment with non-performative nature of gathering"
+          ]
+        },
+        {
+          title: "Acceptance & Waitlist",
+          items: [
+            "Pricing shared only after acceptance",
+            "If capacity reached, priority waitlist opened",
+            "Placement based on fit, not timestamp"
+          ]
+        }
+      ]
+    },
+
+    pricing: {
+      heading: "Investment",
+      body: [
+        "Pricing disclosed in INR after acceptance.",
+        "Varies by logistics and location.",
+        "No early-bird discounts or public tiers.",
+        "Large cohort size, but capped to protect coherence."
+      ],
+      waitlist: [
+        "Priority waitlist for qualified applicants",
+        "Held once every 2 years",
+        "Alumni receive priority access"
+      ]
+    },
+
+    faq: {
+      heading: "Common Questions",
+      items: [
+        {
+          q: "Do I need to have attended a retreat before?",
+          a: "Prior participation in a 7point83 retreat is preferred but not mandatory. Demonstrated readiness and alignment with our protocols is essential."
+        },
+        {
+          q: "How is this different from a festival or conference?",
+          a: "The Convergence is not entertainment or networking. It's a temporary village focused on collective nervous system regulation through shared rhythm and silence."
+        },
+        {
+          q: "What does 'collective synchronization' mean?",
+          a: "Through shared practices like synchronized breathing, movement, and extended silence, participants experience physiological and emotional coherence at scale."
+        },
+        {
+          q: "Will there be speakers or workshops?",
+          a: "No public schedule, no speaker list, no digital agenda. The experience is about embodied presence, not information consumption."
+        },
+        {
+          q: "How large is the gathering?",
+          a: "Large enough to create collective field effects, but capped to maintain coherence. Exact numbers are not disclosed publicly."
+        }
+      ]
+    },
+
+    finalCta: {
+      heading: "Ready to experience collective coherence?",
+      body: [
+        "The internet connects minds. The Convergence reconnects nervous systems.",
+        "For three days, the noise drops. The signal rises. And people remember what regulated humanity feels like."
+      ],
+      ctas: [
+        { label: "Apply for The Convergence", href: "/apply?retreat=convergence" },
+        { label: "Explore Other Retreats", href: "/retreats" }
+      ]
+    },
+
     highlights: [
-      "Daily Abhyanga (Oil Massage)",
-      "Shirodhara (Oil Pouring)",
-      "Doctor Consultations",
-      "Yoga for Dosha Balancing",
-      "Backwater Sunset Cruises"
+      "Collective grounding practices",
+      "Extended shared silence",
+      "Synchronized movement & sound",
+      "Temporary village living",
+      "No hierarchy or stages"
     ],
     dailyFlow: [
-      { time: "06:30 AM", activity: "Medicinal Tea & Yoga" },
-      { time: "08:30 AM", activity: "Breakfast" },
-      { time: "10:00 AM", activity: "Treatment Session I" },
-      { time: "01:00 PM", activity: "Ayurvedic Lunch" },
-      { time: "03:00 PM", activity: "Treatment Session II or Rest" },
-      { time: "05:30 PM", activity: "Meditation / Chanting" },
-      { time: "07:00 PM", activity: "Dinner" }
+      { time: "Day 1", activity: "Arrival, collective grounding, circadian alignment" },
+      { time: "Day 2", activity: "Shared silence, synchronized movement, temporary village living" },
+      { time: "Day 3", activity: "Integration practices, closing rituals, departure" }
     ],
-    accommodation: "Traditional Kerala architecture cottages with open-roof bathrooms.",
+    accommodation: "Temporary village-style accommodations designed for community living while maintaining personal space.",
     inclusions: [
-      "13 Nights Accommodation",
-      "Full Board Ayurvedic Meals",
-      "Daily Treatments",
-      "Doctor's Fees & Medicines",
-      "Cultural Programs"
-    ]
-  },
-  {
-    id: "the-transformation",
-    title: "The Transformation",
-    subtitle: "Rebirth",
-    duration: "21 Days",
-    location: "Rishikesh (Ganga)",
-    price: "₹1,65,000",
-    image: "/images/philosophy-resonance.jpg",
-    description: "Extended phases that weave detox, strength, deep work, and finish with an integration week. A complete life reset.",
-    longDescription: "21 days is the time it takes to break a habit and form a new one. This is our magnum opus—a comprehensive journey that moves through three distinct phases: Cleanse (Body), Clarify (Mind), and Integrate (Spirit). It is intense, challenging, and profoundly life-changing.",
-    tags: ["Transformation", "Intensive", "Life Change"],
-    highlights: [
-      "Full Panchakarma Detox",
-      "Advanced Meditation Training",
-      "Silence Period (Mauna)",
-      "Strength & Conditioning Camp",
-      "Life Visioning Workshops"
-    ],
-    dailyFlow: [
-      { time: "05:30 AM", activity: "Ganga Dip & Aarti" },
-      { time: "06:30 AM", activity: "Intensive Yoga Practice" },
-      { time: "09:00 AM", activity: "Breakfast" },
-      { time: "11:00 AM", activity: "Philosophy / Theory Class" },
-      { time: "01:00 PM", activity: "Lunch" },
-      { time: "04:00 PM", activity: "Strength Training / Hike" },
-      { time: "07:00 PM", activity: "Satsang / Community Sharing" }
-    ],
-    accommodation: "Premium suites overlooking the Ganges river. Modern amenities with spiritual simplicity.",
-    inclusions: [
-      "20 Nights Accommodation",
-      "All Meals & Supplements",
-      "All Therapies & Classes",
-      "Excursions to Sacred Sites",
-      "Lifetime Alumni Membership"
+      "All accommodation and meals",
+      "Collective practices and facilitation",
+      "Safety teams and protocols",
+      "Post-event integration resources",
+      "Alumni network access"
     ]
   }
 ];
