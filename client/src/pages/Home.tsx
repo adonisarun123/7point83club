@@ -116,11 +116,11 @@ export default function Home() {
             <div className="grid grid-cols-3 gap-8 pt-8 border-t border-border">
               <div>
                 <span className="block text-4xl font-serif mb-2">4</span>
-                <span className="text-xs uppercase tracking-widest text-muted-foreground">Durations</span>
+                <span className="text-xs uppercase tracking-widest text-muted-foreground">Retreats</span>
               </div>
               <div>
-                <span className="block text-4xl font-serif mb-2">6</span>
-                <span className="text-xs uppercase tracking-widest text-muted-foreground">Specializations</span>
+                <span className="block text-4xl font-serif mb-2">Apply</span>
+                <span className="text-xs uppercase tracking-widest text-muted-foreground">Only Access</span>
               </div>
               <div>
                 <span className="block text-4xl font-serif mb-2">12-20</span>
@@ -155,38 +155,38 @@ export default function Home() {
               <h2 className="font-serif text-4xl md:text-5xl text-foreground">Choose your journey</h2>
             </div>
             <p className="max-w-md text-muted-foreground text-right md:text-left">
-              Four durations, six tracks. Find the perfect balance of time and intention for your reset.
+              Four distinct protocols. Each designed for a specific transformation.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                title: "5-Day Reset",
-                subtitle: "Fast Reset",
-                price: "₹29k – ₹55k",
-                desc: "Simple repeatable routines, daily nature, and a strong focus on nervous system repair.",
+                title: "The Anchor",
+                subtitle: "Foundation",
+                focus: "Nervous System Reset",
+                desc: "Reset the baseline. Restore the body's capacity to rest. For chronically overstimulated systems.",
                 color: "bg-[#E8F3E8] text-[#1A3A2A]"
               },
               {
-                title: "7-Day Rebalance",
-                subtitle: "Deep Rebalance",
-                price: "₹45k – ₹85k",
-                desc: "Adds deeper practice blocks, therapy focus days, and a longer silence window.",
+                title: "The Flow",
+                subtitle: "Expansion",
+                focus: "Cognitive Flexibility",
+                desc: "Restore mental range. Let insight return. For minds that feel rigid or creatively blocked.",
                 color: "bg-[#F5EFE6] text-[#3D342B]"
               },
               {
-                title: "11-Day Deep Work",
-                subtitle: "Lifestyle Redesign",
-                price: "₹75k – ₹1.45L",
-                desc: "Skill workshops, stronger breath and strength progressions, and mindful habit architecture.",
+                title: "The Forge",
+                subtitle: "Resilience",
+                focus: "Anti-Fragility Training",
+                desc: "Capacity under pressure is trained, not imagined. Controlled stressors with deliberate recovery.",
                 color: "bg-[#E6EEF5] text-[#1E2A38]"
               },
               {
-                title: "21-Day Transform",
-                subtitle: "Full Transformation",
-                price: "₹1.65L – ₹3.5L",
-                desc: "Extended phases that weave detox, strength, deep work, and finish with an integration week.",
+                title: "The Void",
+                subtitle: "Transcendence",
+                focus: "Silence & Clarity",
+                desc: "Silence is not absence. It is signal. Noble Silence for those ready to sit with themselves fully.",
                 color: "bg-[#F5E6E6] text-[#3D2B2B]"
               }
             ].map((item, i) => (
@@ -195,13 +195,14 @@ export default function Home() {
                   <span className="text-xs font-bold uppercase tracking-widest opacity-60">{item.subtitle}</span>
                   <h3 className="font-serif text-3xl leading-none">{item.title}</h3>
                   <div className="w-12 h-[1px] bg-current opacity-20" />
+                  <p className="text-xs uppercase tracking-wider opacity-70 font-medium">{item.focus}</p>
                   <p className="text-sm opacity-80 leading-relaxed">{item.desc}</p>
                 </div>
 
                 <div className="space-y-4">
-                  <p className="font-serif text-xl">{item.price}</p>
+                  <p className="text-xs uppercase tracking-widest opacity-60">Apply-Only</p>
                   <Button variant="ghost" className="w-full justify-between border border-current/20 hover:bg-current/5 group-hover:border-current/40">
-                    Details <ArrowRight className="w-4 h-4" />
+                    Learn More <ArrowRight className="w-4 h-4" />
                   </Button>
                 </div>
               </div>
