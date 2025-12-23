@@ -128,7 +128,6 @@ export default function Privacy() {
                             </p>
                             <div className="bg-muted/30 p-6 rounded-sm">
                                 <p className="text-foreground mb-2"><strong>Email:</strong> 7point83club@gmail.com</p>
-                                <p className="text-foreground mb-2"><strong>Phone:</strong> +91-9740915193</p>
                                 <p className="text-foreground"><strong>Address:</strong> Bengaluru, Karnataka, India</p>
                             </div>
                         </section>
