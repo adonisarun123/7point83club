@@ -85,7 +85,9 @@
     "tailwindcss": "^4.1.18",
     "tsx": "^4.21.0",
     "typescript": "5.9.3",
-    "zod": "^4.2.1"
+    "zod": "^4.2.1",
+    "@tailwindcss/vite": "^4.1.18",
+    "@vitejs/plugin-react": "^5.1.2"
   },
   "overrides": {
     "react-helmet-async": {
@@ -95,7 +97,6 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.19",
-    "@tailwindcss/vite": "^4.1.18",
     "@types/cors": "^2.8.19",
     "@types/express": "5.0.6",
     "@types/google.maps": "^3.58.1",
@@ -103,7 +104,6 @@
     "@types/nodemailer": "^7.0.4",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^5.1.2",
     "add": "^2.0.6",
     "concurrently": "^9.2.1",
     "drizzle-kit": "^0.31.8",
