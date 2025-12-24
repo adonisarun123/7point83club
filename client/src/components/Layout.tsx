@@ -41,26 +41,22 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         )}
       >
         <div className="container flex items-center justify-between">
-          <Link href="/">
-            <a className={cn(
-              "font-serif text-2xl md:text-3xl font-bold tracking-tighter hover:opacity-80 transition-opacity",
-              isScrolled ? "text-foreground" : "text-white"
-            )}>
-              7point83<span className="text-primary">.</span>
-            </a>
+          <Link href="/" className={cn(
+            "font-serif text-2xl md:text-3xl font-bold tracking-tighter hover:opacity-80 transition-opacity",
+            isScrolled ? "text-foreground" : "text-white"
+          )}>
+            7point83<span className="text-primary">.</span>
           </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <Link key={link.name} href={link.href}>
-                <a className={cn(
-                  "text-sm font-medium tracking-wide uppercase hover:text-primary transition-colors relative group",
-                  location === link.href ? "text-primary" : (isScrolled ? "text-foreground/80" : "text-white/90")
-                )}>
-                  {link.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-primary transition-all duration-300 group-hover:w-full" />
-                </a>
+              <Link key={link.name} href={link.href} className={cn(
+                "text-sm font-medium tracking-wide uppercase hover:text-primary transition-colors relative group",
+                location === link.href ? "text-primary" : (isScrolled ? "text-foreground/80" : "text-white/90")
+              )}>
+                {link.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-primary transition-all duration-300 group-hover:w-full" />
               </Link>
             ))}
             <Link href="/retreats">
@@ -91,10 +87,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         )}
       >
         {navLinks.map((link) => (
-          <Link key={link.name} href={link.href}>
-            <a className="font-serif text-4xl font-light hover:text-primary transition-colors">
-              {link.name}
-            </a>
+          <Link key={link.name} href={link.href} className="font-serif text-4xl font-light hover:text-primary transition-colors">
+            {link.name}
           </Link>
         ))}
         <Link href="/retreats">
@@ -126,11 +120,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div className="space-y-6">
             <h3 className="font-sans text-xs font-bold uppercase tracking-widest text-white/40">Explore</h3>
             <ul className="space-y-3">
-              <li><Link href="/retreats"><a className="hover:text-primary transition-colors">Retreats</a></Link></li>
-              <li><Link href="/philosophy"><a className="hover:text-primary transition-colors">Philosophy</a></Link></li>
-              <li><Link href="/about"><a className="hover:text-primary transition-colors">About Us</a></Link></li>
-              <li><Link href="/journal"><a className="hover:text-primary transition-colors">Journal</a></Link></li>
-              <li><Link href="/faq"><a className="hover:text-primary transition-colors">FAQs</a></Link></li>
+              <li><Link href="/retreats" className="hover:text-primary transition-colors">Retreats</Link></li>
+              <li><Link href="/philosophy" className="hover:text-primary transition-colors">Philosophy</Link></li>
+              <li><Link href="/about" className="hover:text-primary transition-colors">About Us</Link></li>
+              <li><Link href="/journal" className="hover:text-primary transition-colors">Journal</Link></li>
+              <li><Link href="/faq" className="hover:text-primary transition-colors">FAQs</Link></li>
             </ul>
           </div>
 
@@ -154,8 +148,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="container mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/40 uppercase tracking-wider">
           <p>© 2025 7point83 Club. All rights reserved.</p>
           <div className="flex gap-8">
-            <Link href="/privacy"><a className="hover:text-white transition-colors">Privacy</a></Link>
-            <Link href="/terms"><a className="hover:text-white transition-colors">Terms</a></Link>
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
           </div>
         </div>
       </footer>

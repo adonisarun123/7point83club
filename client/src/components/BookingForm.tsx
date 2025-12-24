@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -38,6 +38,20 @@ export default function BookingForm({ isOpen, onClose, preselectedRetreatId }: B
         hearAboutUs: "",
     });
 
+    // Lock body scroll when modal is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+
+        // Cleanup on unmount
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [isOpen]);
+
     const handleChange = (field: string, value: string) => {
         setFormData((prev) => ({ ...prev, [field]: value }));
     };
@@ -46,42 +60,60 @@ export default function BookingForm({ isOpen, onClose, preselectedRetreatId }: B
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-
-        // In production, you would send this to your backend
-        console.log("Form submitted:", formData);
-
-        setIsSubmitting(false);
-        setIsSuccess(true);
-
-        // Reset form after 3 seconds
-        setTimeout(() => {
-            setIsSuccess(false);
-            onClose();
-            setFormData({
-                firstName: "",
-                lastName: "",
-                email: "",
-                phone: "",
-                retreatId: preselectedRetreatId || "",
-                preferredDate: "",
-                numberOfGuests: "1",
-                dietaryRestrictions: "",
-                medicalConditions: "",
-                emergencyContact: "",
-                emergencyPhone: "",
-                specialRequests: "",
-                hearAboutUs: "",
+        try {
+            const response = await fetch('/api/bookings', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
             });
-        }, 3000);
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                if (response.status === 429) {
+                    alert(data.error || 'You can only submit once per minute. Please try again later.');
+                } else {
+                    alert(data.error || 'Submission failed. Please try again.');
+                }
+                setIsSubmitting(false);
+                return;
+            }
+
+            setIsSubmitting(false);
+            setIsSuccess(true);
+
+            // Reset form after 3 seconds
+            setTimeout(() => {
+                setIsSuccess(false);
+                onClose();
+                setFormData({
+                    firstName: "",
+                    lastName: "",
+                    email: "",
+                    phone: "",
+                    retreatId: preselectedRetreatId || "",
+                    preferredDate: "",
+                    numberOfGuests: "1",
+                    dietaryRestrictions: "",
+                    medicalConditions: "",
+                    emergencyContact: "",
+                    emergencyPhone: "",
+                    specialRequests: "",
+                    hearAboutUs: "",
+                });
+            }, 3000);
+        } catch (error) {
+            console.error('Submission error:', error);
+            alert('Failed to submit application. Please try again.');
+            setIsSubmitting(false);
+        }
     };
 
     if (!isOpen) return null;
 
     if (isSuccess) {
         return (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm overflow-hidden">
                 <div className="bg-background p-12 rounded-sm max-w-md w-full mx-4 text-center">
                     <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
                         <Check className="w-8 h-8 text-primary" />
@@ -99,8 +131,8 @@ export default function BookingForm({ isOpen, onClose, preselectedRetreatId }: B
     }
 
     return (
-        <div className="fixed inset-0 z-50 overflow-y-auto">
-            <div className="min-h-screen flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 overflow-hidden">
+            <div className="fixed inset-0 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
                 <div className="bg-background rounded-sm max-w-3xl w-full max-h-[90vh] overflow-y-auto">
                     {/* Header */}
                     <div className="sticky top-0 bg-background border-b border-border p-6 flex items-center justify-between">
