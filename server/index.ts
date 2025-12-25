@@ -56,17 +56,25 @@ export function createApp() {
       const [submission] = await db.insert(bookingSubmissions).values(req.body).returning();
       console.log(`[API] ✓ Saved to database with ID: ${submission.id}`);
 
-      // Send emails
-      setImmediate(async () => {
-        try {
-          await sendLeadNotification(req.body);
-          console.log('[Email] ✓ Lead notification sent');
-        } catch (e) { console.error('[Email] ✗ Lead notification failed:', e); }
-        try {
-          await sendConfirmationEmail(req.body);
-          console.log('[Email] ✓ User confirmation sent');
-        } catch (e) { console.error('[Email] ✗ User confirmation failed:', e); }
-      });
+      // Send emails (must happen before response in serverless functions)
+      // Using Promise.allSettled to send both emails concurrently without blocking each other
+      const emailResults = await Promise.allSettled([
+        sendLeadNotification(req.body),
+        sendConfirmationEmail(req.body)
+      ]);
+
+      // Log email results
+      if (emailResults[0].status === 'fulfilled') {
+        console.log('[Email] ✓ Lead notification sent');
+      } else {
+        console.error('[Email] ✗ Lead notification failed:', emailResults[0].reason);
+      }
+
+      if (emailResults[1].status === 'fulfilled') {
+        console.log('[Email] ✓ User confirmation sent');
+      } else {
+        console.error('[Email] ✗ User confirmation failed:', emailResults[1].reason);
+      }
 
       res.json({ success: true, submissionId: submission.id });
     } catch (error) {
