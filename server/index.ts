@@ -1,23 +1,19 @@
-import dotenv from "dotenv";
-import path from "path";
-import { fileURLToPath } from "url";
+import './bootstrap.js'; // MUST be the first import to load env vars
 import express from "express";
 import { createServer } from "http";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
+import { db } from "../db/index.js";
+import { bookingSubmissions } from "../db/schema.js";
+import { sendLeadNotification, sendConfirmationEmail } from "./email.js";
+import { checkRateLimit } from "./rateLimit.js";
 
-// CRITICAL: Load environment variables FIRST
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 // Export the app creation logic for Vercel
-export async function createApp() {
-  // Dynamically import local modules AFTER loading env vars
-  const { db } = await import("../db/index.js");
-  const { bookingSubmissions } = await import("../db/schema.js");
-  const { sendLeadNotification, sendConfirmationEmail } = await import("./email.js");
-  const { checkRateLimit } = await import("./rateLimit.js");
-
+export function createApp() {
   const app = express();
 
   // Middleware
@@ -77,23 +73,24 @@ export async function createApp() {
 // Only start the server if running locally/standalone
 if (import.meta.url === `file://${process.argv[1]}`) {
   console.log("Starting server in standalone mode...");
-  createApp().then((app) => {
-    const staticPath = process.env.NODE_ENV === "production"
-      ? path.resolve(__dirname, "public")
-      : path.resolve(__dirname, "..", "dist", "public");
+  const app = createApp();
 
-    // Static files and catch-all for local dev
-    app.use(express.static(staticPath));
-    app.get("/{*splat}", (_req, res) => {
-      res.sendFile(path.join(staticPath, "index.html"));
-    });
+  const staticPath = process.env.NODE_ENV === "production"
+    ? path.resolve(__dirname, "public")
+    : path.resolve(__dirname, "..", "dist", "public");
 
-    const server = createServer(app);
-    const port = process.env.API_PORT || 3001;
-    server.listen(port, () => {
-      console.log(`\n🚀 Server running on http://localhost:${port}/`);
-      console.log(`📊 API endpoint: http://localhost:${port}/api/bookings`);
-      console.log(`💾 Database: Connected to Neon`);
-    });
-  }).catch(console.error);
+  // Static files and catch-all for local dev
+  app.use(express.static(staticPath));
+  app.get("/{*splat}", (_req, res) => {
+    res.sendFile(path.join(staticPath, "index.html"));
+  });
+
+  const server = createServer(app);
+  const port = process.env.API_PORT || 3001;
+  server.listen(port, () => {
+    console.log(`\n🚀 Server running on http://localhost:${port}/`);
+    console.log(`📊 API endpoint: http://localhost:${port}/api/bookings`);
+    console.log(`💾 Database: Connected to Neon`);
+    console.log(`📧 Email: Ready to send via Nodemailer\n`);
+  });
 }
