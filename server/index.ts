@@ -1,4 +1,4 @@
-import './bootstrap.js'; // MUST be the first import to load env vars
+import dotenv from 'dotenv';
 import express from "express";
 import { createServer } from "http";
 import cors from "cors";
@@ -8,6 +8,14 @@ import { db } from "../db/index.js";
 import { bookingSubmissions } from "../db/schema.js";
 import { sendLeadNotification, sendConfirmationEmail } from "./email.js";
 import { checkRateLimit } from "./rateLimit.js";
+
+// Load environment variables for local development only
+// Vercel injects env vars directly, so dotenv is only needed locally
+if (process.env.NODE_ENV !== 'production') {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  dotenv.config({ path: path.resolve(__dirname, '../.env') });
+}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
