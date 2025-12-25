@@ -1,8 +1,7 @@
 import { createApp } from "../server/index.js";
 
-// Vercel Serverless Function handler
-export default function handler(req, res) {
-    const app = createApp();
-    // Pass the request to the express app
-    app(req, res);
-}
+// Create the Express app once on cold start (not on every request!)
+const app = createApp();
+
+// Export the app - Vercel will invoke it with (req, res) automatically
+export default app;
